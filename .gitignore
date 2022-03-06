@@ -1,0 +1,4 @@
+# gitignore for RoboGator
+
+# ignore the following files
+*mat

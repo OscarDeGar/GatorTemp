@@ -15,7 +15,7 @@ function camera = setupCamera()
     camera.ExposureMode = 'manual'; % for LifeCam
     camera.WhiteBalanceMode = 'manual';
     % experimentlaly determine best exposure setting for lab, enter here
-    camera.Exposure = -3; % for LifeCam
+    camera.Exposure = -6; % for LifeCam
     % robotCam.WhiteBalanceMode = 'manual'; % for LifeCam
     camera.Brightness = 64;
     camera.Resolution = '1600x1200';
