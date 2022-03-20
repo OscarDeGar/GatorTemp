@@ -1,6 +1,6 @@
 function [teensy] = setupTeensy()
     
-    SerialPort = 'com5';   %serial port
+    SerialPort = 'com6';   %serial port
     buadRate = 9600;       %baud rate
     
     %%Set up the serial port object
