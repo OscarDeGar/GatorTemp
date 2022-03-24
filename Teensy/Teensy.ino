@@ -16,11 +16,11 @@ void setup() {
 }
 
 void loop() {
-  getSharpData();
+//  getSharpData();
 //  getSonarData();
 //  gpsData = getGpsData();
-//  matlabWrite();
-//  delay(1000);
+  matlabWrite();
+  delay(1000);
 }
 
 
@@ -66,6 +66,7 @@ void getSonarData() {
 //    Code to talk to MATLAB via serial communication
 
 void matlabWrite() {
+  Serial.write("hello");
 }
 
 // --------------------

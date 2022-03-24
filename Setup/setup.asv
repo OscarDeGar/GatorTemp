@@ -10,7 +10,7 @@ function objects = setup()
     [lidar] = setupLidar();
     [joystick] = setupJoystick();
 
-    % Seperate Arduino objects/connections
+    % Seperate 
     nano = nano_objects.nano;
     sharpIR = nano_objects.sharpIR;
     sonar = nano_objects.sonar;
@@ -19,7 +19,6 @@ function objects = setup()
     steer = nano_objects.steer;
     throttle = nano_objects.throttle;
     
-    % Package objects
     objects = struct(...
         "nano",nano,...
         "sharpIR",sharpIR,...
