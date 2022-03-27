@@ -3,9 +3,9 @@ function sonarData = senseSonar(nano, sonar)
     % Outputs: sonarData(matrix) - Sonar 1-2 data
     
     % Data buffer and insertion
-    sonarData = zeros(1,2);
-    for i=1:2
-        voltage = readVoltage(nano,sonar(:,1));
+    sonarData = zeros(1,length(sonar));
+    for i=1:length(sonar)
+        voltage = readVoltage(nano,sonar(i));
         sonarData(:,i) = voltage;   % NEEDS CALIBRATION/FILTER
     end
 end
