@@ -1,3 +1,8 @@
 function gps = setupGps()
-    gps = 1;
+%%% Setup GPS
+    % OUTPUTS: gps(object) - gps object
+    
+    % Setup
+    gps = gpdev("COM9");
+    flush(gps);
 end
