@@ -7,15 +7,13 @@ function velocity = velocitySense(camera)
     of.Smoothness = 0.1;
 
     % Take image
-    frame1 = im2double(im2gray(snapshot(camera)));
-    frame2 = im2double(im2gray(snapnow(camera)));
-    frames = cat(3, frame1, frame2);
+    frame = im2double(im2gray(snapshot(camera)));
 
     % Estimate flow
-    flow = estimateFlow(of, frames(:,:,2));
+    flow = estimateFlow(of, frame);
     flowMag = flow.Magnitude;
 
     % Threshold conversion (NEEDED)
-
+    velocity = mean(mean(flowMag)); % replace with conversion
     
 end
