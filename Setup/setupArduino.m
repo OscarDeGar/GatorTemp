@@ -1,21 +1,21 @@
-function [nano_objects] = setupArduino()
+function [nano_objects] = setupArduino(SerialPort)
 %%% Setup Arduion Nano 33 BLE
     % Outputs: nano_objects(struct) - colletion of arduino object and pin
-    %          values for connections
+    %          values for connection
 
-    SerialPort = 'COM13';   %serial port
     board = 'Nano33BLE';   %board name
     
-    % Set up the Arduino Nano 33 BLE
+    % Set up the Arduino Nano 33 BLE and IMU
     nano = arduino(SerialPort,board, 'Libraries', 'I2C');
+    imu = lsm9ds1(nano,"Bus",1);
 
     % Setup Pins
     sharpIR1 = "A0";
     sharpIR2 = "A1";
     sharpIR3 = "A2";
     sharpIR4 = "A3";
-    sharpIR5 = "A4";
-    sharpIR6 = "A5";
+%     sharpIR5 = "A4";  %% Can get rid of two sharp or 2 sonar
+%     sharpIR6 = "A5";  %% internal pull up, defaulted for I2C bus
     sonar1 = "A6";
     sonar2 = "A7";
     tilt = "D3";
@@ -30,7 +30,7 @@ function [nano_objects] = setupArduino()
     configurePin(nano,sharpIR3,'AnalogInput');
     configurePin(nano,sharpIR4,'AnalogInput');
 %     configurePin(nano,sharpIR5,'AnalogInput');
-%     configurePin(nano,sharpIR6,'AnalogInput');
+%     configurePin(nano,sharpIR6,'AnalogInputna');
     configurePin(nano,sonar1,'AnalogInput');
     configurePin(nano,sonar2,'AnalogInput');
 
@@ -45,6 +45,7 @@ function [nano_objects] = setupArduino()
 
     nano_objects = struct(...
         "nano",nano,...
+        "imu",imu,...
         "sharpIR",sharps,...
         "sonar",sonars,...
         "tilt",tilt,...

@@ -12,6 +12,7 @@ function objects = setup()
 
     % Seperate Arduino objects/connections
     nano = nano_objects.nano;
+    imu = nano_objects.imu;
     sharpIR = nano_objects.sharpIR;
     sonar = nano_objects.sonar;
     tilt = nano_objects.tilt;
