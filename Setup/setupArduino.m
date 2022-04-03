@@ -18,8 +18,8 @@ function [nano_objects] = setupArduino(SerialPort)
 %     sharpIR6 = "A5";  %% internal pull up, defaulted for I2C bus
     sonar1 = "A6";
     sonar2 = "A7";
-    tilt = "D3";
-    pan = "D4";
+    panPin = "D3";
+    tiltPin = "D4";
     steer = "D5";
     throttle = "D6";
     
@@ -34,10 +34,11 @@ function [nano_objects] = setupArduino(SerialPort)
     configurePin(nano,sonar1,'AnalogInput');
     configurePin(nano,sonar2,'AnalogInput');
 
-    configurePin(nano,tilt,'DigitalOutput');    % MOTORS/SERVOS
-    configurePin(nano,pan,'DigitalOutput');
+     % MOTORS/SERVOS
     configurePin(nano,steer,'DigitalOutput');
     configurePin(nano,throttle,'DigitalOutput');
+    tilt = servo(nano, tiltPin, 'MinPulseDuration', 553*10^-6, 'MaxPulseDuration', 2450*10^-6);
+    pan = servo(nano, panPin, 'MinPulseDuration', 553*10^-6, 'MaxPulseDuration', 2450*10^-6);
 
     % Package Nano and connections
     sharps = [sharpIR1; sharpIR2; sharpIR3; sharpIR4];
