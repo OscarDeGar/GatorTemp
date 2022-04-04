@@ -1,4 +1,4 @@
-classdef SICK_LIDAR_LMS_291
+classdef SICK_LIDAR_LMS_291<handle
 %Make sure that the SICK LIDAR has a green light
 %When reading from Serial only only the first two hex characters are the
 %same the characters after change based on computer.
@@ -21,16 +21,16 @@ classdef SICK_LIDAR_LMS_291
         UNIT="CM";
         
         %TODO
-        %Better way of sharing serial
         %Plotting function
+        %Getting Data Function
         %EXTRA STUFF!!
 
     end
 
     methods
        
-        function Connect_Serial(SICK_LIDAR_LMS_291_OBJECT)
-              clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
+        function SICK_LIDAR_LMS_291_OBJECT=Connect_Serial(SICK_LIDAR_LMS_291_OBJECT)
+             clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
             %no parity, 1 stop bit, no flow control
             if SICK_LIDAR_LMS_291_OBJECT.INITIALIZED==0
                 Initial_buad=9600;
@@ -39,6 +39,8 @@ classdef SICK_LIDAR_LMS_291
             else
                 SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
             end
+            check_hex = uint8(hex2dec(["02" "00" "02" "00" "20" "25" "35" "08"]));%This line stops continuing tranmissions
+            write(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,check_hex,"uint8");
            switch(SICK_LIDAR_LMS_291_OBJECT.BUAD)
                case 9600 
               %This case is not totally nessesary since 9800 buad is the defualt, but case could be helpful if switching buad rates while LiDAR is on
@@ -62,7 +64,7 @@ classdef SICK_LIDAR_LMS_291
         end
 
         function SICK_LIDAR_LMS_291_OBJECT=Angular_Sweep(SICK_LIDAR_LMS_291_OBJECT)
-            SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
+            %SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
            switch(SICK_LIDAR_LMS_291_OBJECT.ANGLE_RANGE)
            case 100
 
@@ -102,7 +104,7 @@ classdef SICK_LIDAR_LMS_291
         end
 
         function SICK_LIDAR_LMS_291_OBJECT=Change_Settings(SICK_LIDAR_LMS_291_OBJECT) %Takes 14 seconds to run
-            SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
+            %SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
             sent_hex = uint8(hex2dec(["02" "00" "0A" "00" "20" "00" "53" "49" "43" "4B" "5F" "4C" "4D" "53" "BE" "C5"]));%Go into settings
             write(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,sent_hex,"uint8");
             pause(7) %Specified in data sheet
@@ -128,7 +130,7 @@ classdef SICK_LIDAR_LMS_291
         end
 
         function SICK_LIDAR_LMS_291_OBJECT=Check_Connection(SICK_LIDAR_LMS_291_OBJECT) %Used to debug
-            SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
+            %SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
             check_hex = uint8(hex2dec(["02" "00" "01" "00" "31" "15" "12"])); 
             write(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,check_hex,"uint8");
             Read_Serial_connection=dec2hex(read(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,161,"uint8")); %This is probably more then 100 bytes
@@ -139,8 +141,8 @@ classdef SICK_LIDAR_LMS_291
             end
         end
         function SICK_LIDAR_LMS_291_OBJECT=Get_Reading(SICK_LIDAR_LMS_291_OBJECT)
-             clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
-            SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
+%              clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
+%             SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
             Length_of_data=((SICK_LIDAR_LMS_291_OBJECT.ANGLE_RANGE/SICK_LIDAR_LMS_291_OBJECT.ANGULAR_RESOLUTION)+1);
             Length_of_message=(8+8+16+8+16+16*Length_of_data+8+16)/8;
             check_hex = uint8(hex2dec(["02" "00" "02" "00" "20" "24" "34" "08"])); 
@@ -157,14 +159,20 @@ classdef SICK_LIDAR_LMS_291
             if ~isequal (Check_Length(1,:),'02')
                 error('Wrong Serial read1')
             end
-            SICK_LIDAR_LMS_291_OBJECT.CURRENT_READING=Read_Serial_connection;
-            check_hex = uint8(hex2dec(["02" "00" "02" "00" "20" "25" "35" "08"]));
+            %TODO This for loop may be wrong
+            for i=1:2:length(Read_Serial_connection((8+8+16+8+16+16)/8+1:(8+8+16+8+16+16+16*Length_of_data)/8))
+                 Decimal_output((i+1)/2) = bin2dec((hexToBinaryVector(Read_Serial_connection((8+8+16+8+16+16)/8+1+i))+hexToBinaryVector(Read_Serial_connection((8+8+16+8+16+16)/8+1+i+1))));
+            end
+            %SICK_LIDAR_LMS_291_OBJECT.CURRENT_READING=Read_Serial_connection((8+8+16+8+16+16)/8+1:(8+8+16+8+16+16+16*Length_of_data)/8);
+            SICK_LIDAR_LMS_291_OBJECT.CURRENT_READING=Decimal_output;
+            
+            check_hex = uint8(hex2dec(["02" "00" "02" "00" "20" "25" "35" "08"]));%This line stops tranmission
             write(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,check_hex,"uint8");
         end
 
         function SICK_LIDAR_LMS_291_OBJECT=STOP(SICK_LIDAR_LMS_291_OBJECT)
-            clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
-            SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
+%             clear SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE
+%             SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
             check_hex = uint8(hex2dec(["02" "00" "02" "00" "20" "25" "35" "08"])); 
             write(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,check_hex,"uint8");
             Check_Length=dec2hex(read(SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE,10,"uint8"))
