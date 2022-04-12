@@ -7,6 +7,7 @@ classdef UST_10LX < handle
         ip = '192.168.0.10'; % Static IP
         port = 10940; % Default port
         t;
+        data;
     end
 
     methods
@@ -90,32 +91,39 @@ classdef UST_10LX < handle
             fopen(obj.t);
             fprintf(obj.t, 'MD0000010000001\n');
             pause(5);
-            %bytes2read = obj.t.BytesAvailable;
-            data = fread(obj.t,obj.t.BytesAvailable);
-            characters = char(data(1:48));
+            data5 = fread(obj.t,obj.t.BytesAvailable);
+            characters = char(data5(1:47));
             str = convertCharsToStrings(characters);
-            data2 = data(48:length(data)) - 48
-            data5 = (data2 == -38);
-            for c = 1:length(data5)
-                if data5(c) == 0
-                    data5(c + 1) = 0;
+            data1=[];
+            data2=data5(48:end)-48;
+            for i=1:size(data2,1)
+                if (mod(i,66)~=65 && mod(i,66)~=0)
+                     data1(end+1)=data2(i);
                 end
             end
-            data5 = data5(1:end-1);
-            data2(data5) = [];
-            data2 = dec2bin(data2);
-            data2 = data2(:,3:end);
-       
-            data2 = data2';
-            data2 = reshape(data2,1,size(data2,1)*size(data2,2))
-            i = 1;
-            data2 = data2(1:end-2)
-            for j = 1:18:(size(data2,2) - 18)
-                data4(i) = bin2dec(data2(j:j+18));
+            data1=data1(1:end-3);
+             data3 = dec2bin(data1);
+             data3 = data3';
+             data3 = reshape(data3,1,size(data3,1)*size(data3,2));
+             data4=[];
+             i=1;
+            for j = 1:18:(size(data3,2) - 18)
+                data4(i) = bin2dec(data3(1,j:j+18));
                 i = i + 1;
             end
-            data4
+           obj.data= data4;
             fclose(obj.t);
+        end 
+
+         function obj = graph(obj)
+        count=0;
+        sweeparray=[];
+        for i= 1:1:100
+            sweeparray(count+1)=count;
+            count=count+1;
+        end
+        r = deg2rad(sweeparray);
+        polarscatter(r,obj.data)
         end 
 
         function obj = lidar_shutdown(obj)
