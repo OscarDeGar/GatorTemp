@@ -22,9 +22,6 @@ We used a number of Hokuyo datasheets in developing this driver. Those include:
 - [Communication Protocol Specification for UST-10LX/UST-20LX](https://www.generationrobots.com/media/Hokuyo%20UST-10LX/UST-10LX_20LX_SCIP_specifications_C-42-04076.pdf)
 - [UTM-30LX Communication Protocol](https://www.robotshop.com/media/files/pdf/communication-protocol-utm-30lx-ew.pdf) - for information about encoding
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
 ## Setup
 
 This setup has been tested on Windows 10. 
