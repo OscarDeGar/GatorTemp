@@ -27,6 +27,8 @@ We used a number of Hokuyo datasheets in developing this driver. Those include:
 This setup has been tested on Windows 10. 
 We suggest downloading Urg-Benri, Hokuyo's proprietary LiDAR testing software, to ensure that you have a connection to the LiDAR and to help with troubleshooting down the line. 
 
+You also need to set up a static IP address for the LiDAR in windows, which you can learn how to do [here](https://www.hellotech.com/guide/for/how-to-set-static-ip-windows-10).
+
 To test your connectivity, run this example code: 
 ```sh
 a = UST_10LX;                % creates UST_10LX object
