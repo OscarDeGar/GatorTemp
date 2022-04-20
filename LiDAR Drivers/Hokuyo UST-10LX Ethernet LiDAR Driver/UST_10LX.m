@@ -105,8 +105,37 @@ classdef UST_10LX < handle
             end 
         end 
 
-        function id_target() 
-
+        function len = id_target(start_index,distance_to_object,angles) 
+            % distance is an array of distances corresponding to each point -
+            % points are read left to right 
+            stillTarget = true;          
+            tolerance = 500;
+            minDistance = 1000;
+            targetIndex = start_index + 5;
+            last_index = length(distance_to_object);
+            while targetIndex < length(distance_to_object) && stillTarget == true
+                if targetIndex > 1
+                    current_target_distance = distance_to_object(1,targetIndex);
+                    target_difference = current_target_distance - distance_to_object(1,targetIndex - 1);
+                    if abs(target_difference) > tolerance
+                        last_index = targetIndex - 1;
+                        stillTarget = false;
+                    end    
+                else
+                    start_index = start_index + 1;
+                end 
+                if current_target_distance < minDistance
+                    minDistance = current_target_distance;
+                end
+                targetIndex = targetIndex + 1;
+            end 
+            startAngle = rad2deg(angles(start_index));
+            endAngle = rad2deg(angles(last_index));
+            len = last_index - start_index;
+            if len > 6
+                disp(["Target found between angles ", startAngle, " & ", endAngle])
+                disp(len) 
+            end 
         end 
 
         function obj = graph_polar(obj)

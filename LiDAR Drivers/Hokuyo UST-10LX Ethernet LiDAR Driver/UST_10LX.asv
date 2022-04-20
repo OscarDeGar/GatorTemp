@@ -94,8 +94,9 @@ classdef UST_10LX < handle
             distance_to_object = vecnorm([obj.range_data_x_polar; obj.range_data_y_polar]);
             distance_threshold = 314.4; % mm 
             ang_step = 1;
+            min_threshold = 0;
             while ang_step < length(obj.angles)
-            if distance_to_object(ang_step) < max_range && distance_to_object(ang_step) < distance_threshold && distance_to_object(ang_step) > 0
+            if distance_to_object(ang_step) < distance_threshold && distance_to_object(ang_step) > min_threshold
                 disp('There is an obstacle near by');
                 len = id_target(ang_step,distance_to_object,obj.angles);
                 ang_step = ang_step + len;
@@ -104,7 +105,53 @@ classdef UST_10LX < handle
             end 
         end 
 
-        function id_target() 
+        function len = id_target(start_index,distance_to_object,angles) % can I pass
+            % distance is an array of distances corresponding to each point -
+            % points are read left to right 
+            stillTarget = true;          
+            tolerance = 500;
+            minDistance = 1000;
+            targetIndex = start_index + 5;
+            last_index = length(distance_to_object);
+            blueTarget = 55; 
+            yellowTarget = 47; 
+            whiteTarget = 46;
+            redTarget = 38;
+            greenTarget = 31;
+            while targetIndex < length(distance_to_object) && stillTarget == true
+                if targetIndex > 1
+                    current_target_distance = distance_to_object(1,targetIndex);
+                    target_difference = current_target_distance - distance_to_object(1,targetIndex - 1);
+                    if abs(target_difference) > tolerance
+                        last_index = targetIndex - 1;
+                        stillTarget = false;
+                    end    
+                else
+                    start_index = start_index + 1;
+                end 
+                if current_target_distance < minDistance
+                    minDistance = current_target_distance;
+                end
+                targetIndex = targetIndex + 1;
+            end 
+            startAngle = rad2deg(angles(start_index));
+            endAngle = rad2deg(angles(last_index));
+            len = last_index - start_index;
+            if len > 6
+                disp(["Target found between angles ", startAngle, " & ", endAngle])
+                disp(len) 
+            end 
+        %     if len >= blueTarget
+        %         disp("Blue target found " + minDistance + "mm at " + startAngle + " to " + endAngle);
+        %     elseif len >= yellowTarget
+        %         disp("Yellow target found " + minDistance + "mm at " + startAngle + " to " + endAngle);
+        %     elseif len >= whiteTarget
+        %         disp("White target found " + minDistance + "mm at " + startAngle + " to " + endAngle);
+        %     elseif len >= redTarget
+        %         disp("Red target found " + minDistance + "mm at " + startAngle + " to " + endAngle);
+        %     elseif len >= greenTarget
+        %         disp("Green target found " + minDistance + "mm at " + startAngle + " to " + endAngle);
+        %     end 
         end 
 
         function obj = graph_polar(obj)
