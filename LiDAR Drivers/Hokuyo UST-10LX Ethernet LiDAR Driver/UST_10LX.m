@@ -62,38 +62,33 @@ classdef UST_10LX < handle
             fclose(obj.t);%Close tcp ip port
         end 
 
-        function obj = get_distance_write(obj)
-            %Write get distance command to sensor
-            fopen(obj.t);%Opens tcp ip port
+        function obj = get_distance(obj)
+            fopen(obj.t);%Opens tcpip port
             fprintf(obj.t, 'MD0000108000001\n');% Sends command to Lidar to get distance only one scan
-            %pause(0.3);% Wait to read data that was received from the sensor
-        end
-
-        function obj = get_distance_read(obj)
-            %Read the output of the get_distance_write command
-            ints_received = fread(obj.t,obj.t.BytesAvailable);%Read data from sensor
-            without_checksum_int=zeros(1,3246); %Initialize data array
-            ints_received=ints_received(48:end)-48; %Remove the first 47 characters/ints and subtract 0x30 or 48
+            pause(0.3);% Wait to read data that was received from the sensor
+            ints_received = fread(obj.t,obj.t.BytesAvailable);%Read data
+            without_checksum_int=zeros(1,3246);
+            ints_received=ints_received(48:end)-48;
             index=1;
-            for i=1:size(ints_received,1) 
-                if (mod(i,66)~=65 && mod(i,66)~=0) %Remove the checksums and LFs
+            for i=1:size(ints_received,1) %remove the last 3 ints, one check sum and two LFs
+                if (mod(i,66)~=65 && mod(i,66)~=0)
                      without_checksum_int(index)=ints_received(i);
                      index=index+1;
                 end
             end
-            without_checksum_int=without_checksum_int(1:end-3);%Remove the last 3 ints, one check sum and two LFs
-             binary_stream = dec2bin(without_checksum_int); %Convert to binary
-             binary_stream = binary_stream'; %Used in process to convert array of binary numbers into a stream of bits
-             binary_stream = reshape(binary_stream,1,size(binary_stream,1)*size(binary_stream,2)); %Used in process to convert array of binary numbers into a stream of bits
-             final_data=zeros(1,1080); %Initialize data array
+            without_checksum_int=without_checksum_int(1:end-3);
+             binary_stream = dec2bin(without_checksum_int);
+             binary_stream = binary_stream';
+             binary_stream = reshape(binary_stream,1,size(binary_stream,1)*size(binary_stream,2));
+             final_data=zeros(1,1080);
              i=1;
-            for j = 1:18:(size(binary_stream,2) - 18) %iterate over binary stream and combine every 18 bits into a datapoint
-                final_data(i) = bin2dec(binary_stream(1,j:j+18)); %convert 18 bits to integer
+            for j = 1:18:(size(binary_stream,2) - 18)
+                final_data(i) = bin2dec(binary_stream(1,j:j+18));
                 i = i + 1;
             end
-           obj.data= final_data;
+            obj.data= final_data;
             fclose(obj.t);
-        end 
+        end
 
        function obj = graph(obj)
             clf
