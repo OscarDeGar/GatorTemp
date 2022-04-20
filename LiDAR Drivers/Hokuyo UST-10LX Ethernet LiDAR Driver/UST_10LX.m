@@ -3,19 +3,19 @@ classdef UST_10LX < handle
     %Must allow at least 0.3 seconds for data transmission of scan
     %Functions get_distance_write and get_distance_read should be used sequentially
 
-    %Improvements that could be made:
-    %-Implement Check Sums
-    %-Add different angle sweeps and clustering
-    %-Different commands besides "MD" like the "ME" command that returns
-    %intensity and distance
-    %-Add continuous scanning
-    %-Add Error handling for opening and closing tcp ip ports
+    %TODO:
+    %-Add comments back in from previous version 
 
     properties
         ip = '192.168.0.10'; % Static IP
         port = 10940; % Default port
         t; %tcp ip port
         data; %Most recent scan
+        yt; % polar scatter plot 
+        angles; 
+        filtered_data; 
+        range_data_x_polar; % theta 
+        range_data_y_polar; % distance
     end
 
     methods
@@ -90,16 +90,46 @@ classdef UST_10LX < handle
             fclose(obj.t);
         end
 
-       function obj = graph(obj)
+        function obj = basic_object_rec(obj) 
+            distance_to_object = vecnorm([obj.range_data_x_polar; obj.range_data_y_polar]);
+            distance_threshold = 314.4; % mm 
+            ang_step = 1;
+            min_threshold = 0;
+            while ang_step < length(obj.angles)
+            if distance_to_object(ang_step) < distance_threshold && distance_to_object(ang_step) > min_threshold
+                disp('There is an obstacle near by');
+                len = id_target(ang_step,distance_to_object,obj.angles);
+                ang_step = ang_step + len;
+            end
+            ang_step = ang_step + 1;
+            end 
+        end 
+
+        function id_target() 
+
+        end 
+
+        function obj = graph_polar(obj)
             clf
             sweeparray=zeros(1,1080); %Initialize data array
             for i= 1:1080
                 sweeparray(i)=i/1080*270; %create range of 1080 angles between 0 and 270 sequentially
             end
-            r = deg2rad(sweeparray); % convert to radians
-            data6=(obj.data<10000); % remove data points further away then 10 meters
-            yt=polarscatter(r(data6),obj.data(data6)); % plot data
-            yt.SizeData=1; %Change the point scale size
+            obj.range_data_x_polar = deg2rad(sweeparray); % convert to radians
+            obj.range_data_y_polar = (obj.data<10000); % remove data points further away then 10 meters
+            obj.yt = polarscatter(obj.range_data_x_polar(data6),obj.range_data_y_polar(data6)); % plot data
+            obj.yt.SizeData=1; %Change the point scale size
+        end 
+       
+        function obj = graph_cartesian(obj) % on hold - one approach that might be useful 
+            clf
+            sweeparray=zeros(1,1080); %Initialize data array
+            for i= 1:1080
+                sweeparray(i)=i/1080*270; %create range of 1080 angles between 0 and 270 sequentially
+            end
+            obj.range_data_x_polar = deg2rad(sweeparray); % convert to radians
+            obj.range_data_y_polar = (obj.data<10000); % remove data points further away then 10 meters
+            data7 = pol2cart(obj.range_data_x_polar, obj.range_data_y_polar);
         end 
 
         function obj = lidar_shutdown(obj)
