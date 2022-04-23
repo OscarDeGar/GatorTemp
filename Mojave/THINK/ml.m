@@ -17,4 +17,6 @@ function [res] = ml(sensorData, hwobj)
 
     % (Optional? Either here or in follow up function) add vectors to
     % results based on direction of the path
+
+    res = [];
 end

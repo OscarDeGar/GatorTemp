@@ -1,4 +1,4 @@
-function [throttleSpeed, steerAngle, panAngle, tiltAngle] = think_pathPlan(destVec, sensorData, res)
+function [throttleSpeed, steerAngle, panAngle, tiltAngle] = pathPlan(destVec, sensorData, res)
 %%% determine how mojave should react based on results from Jetson
     % Inputs:  destVec(array) - vector with distance and bearing between
     %                           Mojave and destination waypoint
@@ -17,8 +17,8 @@ function [throttleSpeed, steerAngle, panAngle, tiltAngle] = think_pathPlan(destV
 
         % create bell curves based off IR and Lidar data
         % dependent on destVec, since mojave must go towards waypoint
-        curveLidar = think_lidar(destVec, sensorData("lidar"));
-        curveIR = think_IR(destVec, sensorData("sharp"));
+        lidarData = sensorData("lidar");
+        
         
     
         % Average avoid and move values for final value
