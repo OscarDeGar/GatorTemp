@@ -1,102 +1,169 @@
-%Must clear serial link
 classdef UST_10LX < handle
-    %UNTITLED3 Summary of this class goes here
-    %   Detailed explanation goes here
+    %UST_10LX 
+    %Must allow at least 0.3 seconds for data transmission of scan
+    %Functions get_distance_write and get_distance_read should be used sequentially
+
+    %TODO:
+    %-Add comments back in from previous version 
 
     properties
         ip = '192.168.0.10'; % Static IP
         port = 10940; % Default port
-        t;
-        data;
+        t; %tcp ip port
+        data; %Most recent scan
+        yt; % polar scatter plot 
+        angles; 
+        filtered_data; 
+        range_data_x_polar; % theta 
+        range_data_y_polar; % distance
     end
 
     methods
        
         function obj = connect_TCPIP(obj)
-            obj.t = tcpip(obj.ip, obj.port, 'InputBufferSize', 201000);
+            %Connect tcp ip
+            obj.t = tcpip(obj.ip, obj.port, 'InputBufferSize', 201000); 
         end 
 
         function obj = check_status(obj)
-            fopen(obj.t);
-            fprintf(obj.t, 'II\n');
-            pause(0.2);
-            characters = char(fread(obj.t,obj.t.BytesAvailable));
-            str = convertCharsToStrings(characters)
-            fclose(obj.t);
+            %Checks the current status of the sensor
+            fopen(obj.t); %Opens tcp ip port
+            fprintf(obj.t, 'II\n'); %Sends command to Lidar
+            pause(0.3); % Wait to read data that was received from the sensor
+            characters = char(fread(obj.t,obj.t.BytesAvailable)); %Read data
+            convertCharsToStrings(characters) % Convert data to strings and print
+            fclose(obj.t); %Close tcp ip port
         end 
 
         function obj = enter_measurement_state(obj)
-            fopen(obj.t);
-            fprintf(obj.t, 'BM\n');
-            pause(0.2);
-            characters = char(fread(obj.t,obj.t.BytesAvailable));
-            str = convertCharsToStrings(characters);
-            fclose(obj.t);
+            fopen(obj.t);%Opens tcp ip port
+            fprintf(obj.t, 'BM\n');%Sends command to Lidar to enter measurement state
+            pause(0.3); % Wait to read data that was received from the sensor
+            %characters = char(fread(obj.t,obj.t.BytesAvailable)); %Read data
+            %str = convertCharsToStrings(characters);% Convert data to strings
+            fclose(obj.t); %Close tcp ip port
         end 
 
         function obj = get_parameter_info(obj)
-            %obj.t = tcpip(obj.ip, obj.port, 'InputBufferSize', 201000);
-            fopen(obj.t);
-            fprintf(obj.t, 'PP\n');
-            pause(0.2);
-            %bytes2read = obj.t.BytesAvailable;
-            characters = char(fread(obj.t,obj.t.BytesAvailable));
-            str = convertCharsToStrings(characters)
-            fclose(obj.t);
+            fopen(obj.t);%Opens tcp ip port
+            fprintf(obj.t, 'PP\n');%Sends command to Lidar to get parameters
+            pause(0.3);% Wait to read data that was received from the sensor
+            characters = char(fread(obj.t,obj.t.BytesAvailable)); %Read data
+            convertCharsToStrings(characters)% Convert data to strings and print
+            fclose(obj.t);%Close tcp ip port
         end 
 
         function obj = initialize_sensor(obj)
-            fopen(obj.t);
-            fprintf(obj.t, 'VV\n');
-            pause(0.2);
-            characters = char(fread(obj.t,obj.t.BytesAvailable));
-            str = convertCharsToStrings(characters);
-            fclose(obj.t);
+            fopen(obj.t);%Opens tcp ip port
+            fprintf(obj.t, 'VV\n');%Sends command to Lidar to initialize sensor
+            pause(0.3);% Wait to read data that was received from the sensor
+            %characters = char(fread(obj.t,obj.t.BytesAvailable));%Read data
+            %str = convertCharsToStrings(characters);% Convert data to strings
+            fclose(obj.t);%Close tcp ip port
         end 
 
         function obj = get_distance(obj)
-            fopen(obj.t);
-            fprintf(obj.t, 'MD0000108000001\n');
-            pause(0.3);
-            data5 = fread(obj.t,obj.t.BytesAvailable);
-            data1=[];
-            data2=data5(48:end)-48;
-            for i=1:size(data2,1)
+            fopen(obj.t);%Opens tcpip port
+            fprintf(obj.t, 'MD0000108000001\n');% Sends command to Lidar to get distance only one scan
+            pause(0.3);% Wait to read data that was received from the sensor
+            ints_received = fread(obj.t,obj.t.BytesAvailable);%Read data
+            without_checksum_int=zeros(1,3246);
+            ints_received=ints_received(48:end)-48;
+            index=1;
+            for i=1:size(ints_received,1) %remove the last 3 ints, one check sum and two LFs
                 if (mod(i,66)~=65 && mod(i,66)~=0)
-                     data1(end+1)=data2(i);
+                     without_checksum_int(index)=ints_received(i);
+                     index=index+1;
                 end
             end
-            data1=data1(1:end-3);
-             data3 = dec2bin(data1);
-             data3 = data3';
-             data3 = reshape(data3,1,size(data3,1)*size(data3,2));
-             data4=[];
+            without_checksum_int=without_checksum_int(1:end-3);
+             binary_stream = dec2bin(without_checksum_int);
+             binary_stream = binary_stream';
+             binary_stream = reshape(binary_stream,1,size(binary_stream,1)*size(binary_stream,2));
+             final_data=zeros(1,1080);
              i=1;
-
-            for j = 1:18:(size(data3,2) - 18)
-                data4(i) = bin2dec(data3(1,j:j+18));
+            for j = 1:18:(size(binary_stream,2) - 18)
+                final_data(i) = bin2dec(binary_stream(1,j:j+18));
                 i = i + 1;
             end
-           obj.data= data4;
+            obj.data= final_data;
             fclose(obj.t);
+        end
+
+        function obj = basic_object_rec(obj) 
+            distance_to_object = vecnorm([obj.range_data_x_polar; obj.range_data_y_polar]);
+            distance_threshold = 314.4; % mm 
+            ang_step = 1;
+            min_threshold = 0;
+            while ang_step < length(obj.angles)
+            if distance_to_object(ang_step) < distance_threshold && distance_to_object(ang_step) > min_threshold
+                disp('There is an obstacle near by');
+                len = id_target(ang_step,distance_to_object,obj.angles);
+                ang_step = ang_step + len;
+            end
+            ang_step = ang_step + 1;
+            end 
         end 
 
-       function obj = graph(obj)
-        clf
-        sweeparray=[];
+        function len = id_target(start_index,distance_to_object,angles) 
+            % distance is an array of distances corresponding to each point -
+            % points are read left to right 
+            stillTarget = true;          
+            tolerance = 500;
+            minDistance = 1000;
+            targetIndex = start_index + 5;
+            last_index = length(distance_to_object);
+            while targetIndex < length(distance_to_object) && stillTarget == true
+                if targetIndex > 1
+                    current_target_distance = distance_to_object(1,targetIndex);
+                    target_difference = current_target_distance - distance_to_object(1,targetIndex - 1);
+                    if abs(target_difference) > tolerance
+                        last_index = targetIndex - 1;
+                        stillTarget = false;
+                    end    
+                else
+                    start_index = start_index + 1;
+                end 
+                if current_target_distance < minDistance
+                    minDistance = current_target_distance;
+                end
+                targetIndex = targetIndex + 1;
+            end 
+            startAngle = rad2deg(angles(start_index));
+            endAngle = rad2deg(angles(last_index));
+            len = last_index - start_index;
+            if len > 6
+                disp(["Target found between angles ", startAngle, " & ", endAngle])
+                disp(len) 
+            end 
+        end 
 
-        for i= 1:1080
-            sweeparray(i)=i/1080*270;
-        end
-        r = deg2rad(sweeparray);
-        data6=(obj.data<10000);
-        yt=polarscatter(r(data6),obj.data(data6));
-        yt.SizeData=1;
+        function obj = graph_polar(obj)
+            clf
+            sweeparray=zeros(1,1080); %Initialize data array
+            for i= 1:1080
+                sweeparray(i)=i/1080*270; %create range of 1080 angles between 0 and 270 sequentially
+            end
+            obj.range_data_x_polar = deg2rad(sweeparray); % convert to radians
+            obj.range_data_y_polar = (obj.data<10000); % remove data points further away then 10 meters
+            obj.yt = polarscatter(obj.range_data_x_polar(data6),obj.range_data_y_polar(data6)); % plot data
+            obj.yt.SizeData=1; %Change the point scale size
+        end 
+       
+        function obj = graph_cartesian(obj) % on hold - one approach that might be useful 
+            clf
+            sweeparray=zeros(1,1080); %Initialize data array
+            for i= 1:1080
+                sweeparray(i)=i/1080*270; %create range of 1080 angles between 0 and 270 sequentially
+            end
+            obj.range_data_x_polar = deg2rad(sweeparray); % convert to radians
+            obj.range_data_y_polar = (obj.data<10000); % remove data points further away then 10 meters
+            data7 = pol2cart(obj.range_data_x_polar, obj.range_data_y_polar);
         end 
 
         function obj = lidar_shutdown(obj)
-            fclose(obj.t);
-            delete(obj.t);
+            fclose(obj.t); %Close tcp ip port
+            delete(obj.t); %Clear tcp ip port
         end 
     end 
 end 
