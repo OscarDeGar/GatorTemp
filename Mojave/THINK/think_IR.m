@@ -1,5 +1,7 @@
-function [IRCurve] = think_IR(destVec, sharpData)
+function [IRCurve] = think_IR(destVec, sensorData)
     
+    % get IR data, find minimum distance detected
+    sharpData = sensorData('sharp');
     [dist,idx] = min(sharpData);
 
     % if distance is less than 20, stop immediately
@@ -15,14 +17,18 @@ function [IRCurve] = think_IR(destVec, sharpData)
     elseif idx >= 3 && dist < 100
         % curve right
         curve = createBellCurve(67.5-3/8*dist);
-
-    % if middle sensor picks up an object
+        
     % if no objects are within 1m
     else
+        % get Mojave's orientation (yaw)
+        dirs = think_getOrientation(sensorData('imu'));
+        yaw = dirs(3);
+        
         % get angle to GPS waypoint
         bear = destVec(2);
-
-        angOfAttack = bear + 0; % replace 0 with angle of mojave relative to true N
+        angOfAttack = bear + yaw;
+    
+        % get results of lidarData and determine curve
         curve = createBellCurve(angOfAttack);
     end
 
