@@ -10,8 +10,17 @@ int sonar2 = A7;
 // ------------------
 
 // ----GLOBAL VARIABLE DEF----
-int sharpData[6];
-int sonarData[2];
+double sharpData[6];
+double sonarData[2];
+double motorData[4];
+
+char sharpVal[3];
+char sonarVal[3];
+char motorVal[3];
+
+int sharpLen = sizeof(sharpData) / sizeof(double);
+int sonarLen = sizeof(sonarData) / sizeof(double);
+int motorLen = sizeof(motorData) / sizeof(double);
 // ---------------------------
 
 // ----INCLUDE HEADERS----
@@ -33,14 +42,17 @@ void setup() {
 void loop() {
   getSharpData();
   for (int i=0;i < 6;i++) {
+    Serial.println("-----------------");
     Serial.print("Sharp");
     Serial.print(i);
     Serial.print("(in): ");
     Serial.println(sharpData[i]);
+    Serial.println("-----------------");
   }
 //  getSonarData();
 //  gpsData = getGpsData();
-  matlabWrite();
+//  matlabWrite();
+  delay(1000);
 
 }
 // ------------
@@ -52,16 +64,6 @@ void loop() {
 
 // -----------
 
-
-// ----MATLAB COMMS----
-
-//    Code to talk to MATLAB via serial communication
-
-void matlabWrite() {
-//  Serial.write("hello");
-}
-
-// --------------------
 
 
 
