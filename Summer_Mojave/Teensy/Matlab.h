@@ -6,7 +6,7 @@
 
 void matlabWrite() {
 //  sharpWrite();
-  sonarWrite();
+//  sonarWrite();
 //  motorWrite();
   delay(2000);
 }
