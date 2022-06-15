@@ -44,16 +44,20 @@
 //  panServo.attach(9);
 //  tiltServo.attach(10);
 //  steerServo.attach(11);
-//  Serial.begin(9600); 
+//  Serial.begin(9600);
+//
+//  // ----INIT SERVOS----
+//  panServo.write(panAng);
+//  tiltServo.write(tiltAng);
 //}
 //// -------------
 //
 //
 //// ----MAIN----
 //void loop() {
-////  getSharpData();
-////  getSonarData();
-////  gpsData = getGpsData();
+//  getSharpData();
+//  getSonarData();
+////  cleanData();
 ////  matlabWrite();
 //}
 //// ------------
