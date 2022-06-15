@@ -1,0 +1,25 @@
+function motorControls = thinkJoystick(senseData)
+    sharpData = senseData.sharp;
+    sonarData = senseData.sonar;
+    
+    %%% SHARP FRONT
+    for i=1:2
+
+    end
+
+    %%% SHARP FRONT
+    for i=1:2
+
+    end
+
+    %%% SHARP FRONT
+    for i=1:2
+
+    end
+
+    %%% SONAR
+    for i=1:2
+
+    end
+    
+end

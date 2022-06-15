@@ -1,8 +1,0 @@
-function sense()
-%%% Genral Sense function
- % INPUT: objects - struct w/ Teensy, GPS, Camera
- % OUTPUT: sensorData - struct with sensor data
- teensyData = senseTeensy();
- gpsData = senseGps();
- cameraData = sense
-end
