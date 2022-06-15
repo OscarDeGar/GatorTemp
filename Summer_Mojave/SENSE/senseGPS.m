@@ -16,5 +16,7 @@ function gpsData = senseGPS()
     longitude = rmcData.Longitude
     gpsTime = rmcData.UTCDateTime;
     
-    gpsData = [longitude, latitude];
+    gpsData = struct( ...
+        "long", longitude, ...
+        "lat", latitude);
 end
