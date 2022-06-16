@@ -1,7 +1,7 @@
 function [lidar] = setupLidar(COM)
 %%% setupLidar - setup hokuyo URG-4LX-UG01 LIDAR
-% Inputs: COM(string) - comport to connect to
-% Outputs: lidar(object) - lidar connection
+ % Inputs: COM(string) - comport to connect to
+ % Outputs: lidar(object) - lidar connection
 
     lidar = serial(COM,'baudrate',115200);
     set(lidar,'Timeout',2);

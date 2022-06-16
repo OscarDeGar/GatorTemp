@@ -1,8 +1,8 @@
-% Function to decode range information transmitted using SCIP2.0 protocol.
-% Works for only two and three bit encoding.
-% Author- Shikhar Shrestha, IIT Bhubaneswar
-
 function rangeval=decodeSCIP(rangeenc)
+%%% Function to decode range information transmitted using SCIP2.0 protocol.
+% Works for only two and three bit encoding.
+% Author- Shikhar Shrestha, IIT 
+
 % Check for 2 or 3 Character Encoding
 if rangeenc(1)=='0' && rangeenc(2)=='0' && rangeenc(3)=='0'
     rangeval=0;

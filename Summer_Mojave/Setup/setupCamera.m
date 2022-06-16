@@ -1,4 +1,7 @@
 function camera = setupCamera()
+%%% Camera setup function
+ % OUTPUT: camera(object) - camera COM object
+
     camlist = webcamlist;
     % if multiple cam detected find int in list of the cam we want with
     % string match

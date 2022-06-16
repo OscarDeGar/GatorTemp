@@ -1,6 +1,6 @@
 function gpsData = senseGPS()
 %%% Read GPS data from U-Center output file
- % OUTPUTS: gpsData - [longitude, latitude] data
+ % OUTPUTS: gpsData(struct) - longitude, latitude data
 
     %%$ Read Data
     fileID = fopen("C:\Users\cbabe\Documents\Testing_File.ubx");

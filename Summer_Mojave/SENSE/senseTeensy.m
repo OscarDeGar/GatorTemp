@@ -1,8 +1,9 @@
 function teensyData = senseTeensy(teensy)
 %%% Read Sharp and Sonar Data from Teensy
+ % INPUT: teensy(object) - teensy serial object
+ % OUPTUT: teensyData(struct) - sharp and sonar data
     sharpData = zeros(6,1);
-    sonarData = zeros(2,1);
-    unkData = zeros(6,1);
+    sonarData = zeros(2,1);\
 
     write(teensy,'S','char');
     marker = read(teensy,1,'char');

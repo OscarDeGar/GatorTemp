@@ -1,6 +1,8 @@
 function motorControls = thinkJoystick(senseData)
 %%% Think behavior for joystick demo
- % INPUTS: senseData(
+ % INPUT: senseData(struct) - contains sensor data from SENSE
+ % OUTPUT: motorControls(struct) - pwm controls for Moj. and Servos
+ 
     sharpData = senseData.sharp;
     sonarData = senseData.sonar;
     joystickData = senseData.joystick;

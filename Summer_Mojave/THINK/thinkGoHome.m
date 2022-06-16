@@ -1,0 +1,3 @@
+function motorControls = thinkGoHome()
+
+end
