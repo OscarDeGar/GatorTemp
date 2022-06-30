@@ -1,3 +1,3 @@
-function motorControls = thinkGoHome()
+function [motorControls, masterHeading] = thinkGoHome()
 
 end

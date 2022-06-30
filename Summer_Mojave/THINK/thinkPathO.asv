@@ -10,18 +10,11 @@ function [motorControls, masterHeading] = thinkPathO(senseData, waypoints, waySt
     lidarData = senseData.gps;
     joystickData = senseData.joystick;
     
-    %%% SAFETY CHECK
     % Simple Safety Check(Sharp/Sonar)
     motorControls = safetyCheck(sharpData, sonarData);
 
     % Advanced Safety Check(Lidar)
     motorControls = safetyLidar(lidarData);
-
-    %%% GET VECTOR
-    % Check distance to waypoint
-    if destVec.dist < 1
-        wayStep = wayStep + 1;
-    end
 
     % Get Destination Vector
     if motorControls == -1
@@ -32,12 +25,14 @@ function [motorControls, masterHeading] = thinkPathO(senseData, waypoints, waySt
     if isempty(masterHeading)
         masterHeading = [destVec.bear wayStep];
     end
-    
-    % lidar obstacle avoidance to alter heading
-    lidarOA(lidarData, destVec.bear)
 
-    % combine lidarOA and gps heading
+    % check distance to waypoint
+    if destVec.dist < 0
     
+    % Check to see if onto the next waypoint
+    if masterHeading(:,2) ~= wayStep
+        masterHeading = [destVec.bear wayStep];
+    end
 
 
 end

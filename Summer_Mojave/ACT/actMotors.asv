@@ -8,45 +8,28 @@ function actMotors(motorControls, teensy)
     max = motorControls.max;
     pan = motorControls.pan;
     tilt = motorControls.tilt;
-    lidarTilt = motorControls.lidarTilt;
     
     % Write Throttle Control
     write(teensy,'T',"char");
-    if (read(teensy,1,"char") == 'T')
+    if (read(teensy,1,"char") == "")
         write(teensy,throttle,"uint8");
     end
     
     % Write Steer Angle
     write(teensy,'E',"char");
-    if (read(teensy,1,"char") == 'E')
-        write(teensy,steer,"uint8");
-    end
+    if (read(teensy,1,"char"))
+    write(teensy,steer,"uint8");
 
     % Write Max Speed
     write(teensy,'M',"char");
-    if (read(teensy,1,"char") == 'M')
-        write(teensy,max,"uint8");
-    end
-
+    write(teensy,num2str(max),"string");
 
     % Write Pan Angle
     write(teensy,'P',"char");
-    if (read(teensy,1,"char") == 'P')
-        write(teensy,pan,"uint8");
-    end
-
+    write(teensy,num2str(pan),"string");
     
     % Write Tilt Angle
     write(teensy,'t',"char");
-    if (read(teensy,1,"char") == 't')
-        write(teensy,tilt,"uint8");
-    end
-
-    % Write Lidar Tilt Angle
-    write(teensy,'L',"char");
-    if (read(teensy,1,"char") == 'L')
-        write(teensy,lidarTilt,"uint8");
-    end
-
+    write(teensy,num2str(tilt),"string");
 
 end

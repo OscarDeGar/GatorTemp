@@ -2,7 +2,7 @@
 #define _SHARPIR_H   // (Use a suitable name, usually based on the file name.)
 
 // ----SHARP IR----
-float getVoltageSharp(int pin) {
+int getVoltageSharp(int pin) {
   float volts;
   int avgs = 10;
   int sum_volts = 0;
@@ -12,8 +12,8 @@ float getVoltageSharp(int pin) {
   }
   volts = sum_volts / avgs;
 //  int volts = analogRead(pin);
-  float distance = log(volts/1198.97) / log(0.939862) /2.54;
-  return distance;
+  int distance = log(volts/1198.97) / log(0.939862) / 2.54; // cm
+  return distance;    
 }
 
 void getSharpData() {

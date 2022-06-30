@@ -1,3 +1,3 @@
-function motorControls = thinkPathD()
+function [motorControls, masterHeading] = thinkPathD()
 
 end
