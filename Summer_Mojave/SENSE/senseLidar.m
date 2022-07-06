@@ -45,7 +45,5 @@ function lidarData = senseLidar(lidar)
     xData = rangescan.*cos((-120:240/682:120-240/682)*pi/180);
     yData = rangescan.*sin((-120:240/682:120-240/682)*pi/180);
 
-    lidarData = struct( ...
-        "x", xData,...
-        "y", yData);
+    lidarData = [xData yData];
 end

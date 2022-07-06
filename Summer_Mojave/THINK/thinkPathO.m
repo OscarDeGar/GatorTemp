@@ -34,7 +34,7 @@ function [motorControls, masterHeading] = thinkPathO(senseData, waypoints, waySt
     end
     
     % lidar obstacle avoidance to alter heading
-    lidarOA(lidarData, destVec.bear)
+    bearOA = lidarOA(lidarData, destVec.bear);
 
     % combine lidarOA and gps heading
     
