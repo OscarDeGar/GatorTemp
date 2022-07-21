@@ -1,0 +1,51 @@
+function gpsData = senseGPS(obj)
+%%% Read GPS data from U-Center output file
+ % OUTPUTS: gpsData(struct) - longitude, latitude data
+    %%$ Read Data
+    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_1_Data.ubx");
+    corrections=fscanf(fileID,'%c');
+    parserObj = nmeaParser("MessageId","RMC");
+    size(parserObj)
+    rmcData = parserObj(corrections);
+    latitude1 = rmcData.Latitude;
+    longitude1 = rmcData.Longitude;
+    gpsTime = rmcData.UTCDateTime
+    fclose(fileID);
+
+
+    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_2_Data.ubx",'r');
+    corrections=fscanf(fileID,'%c')
+    lines = readlines("badpoem.txt")
+%     size(corrections)
+%     i=(size(corrections))
+%     t=i(1,2);
+%     corrections(t)
+%     while(1==1)
+%         corrections(t);
+%         if corrections(t)=="$"
+%             j=1;
+%             while(1==1)
+%                 t=t-1;
+%                 if corrections(t)=="$"
+%                     break
+%                 end
+%                 mnea(j)=corrections(t);
+%                 j=j+1;
+%             end
+%             break
+%         end
+%         t=t-1;
+%     end
+%     mnea = reverse(mnea)
+%     mnea = mnea(1, 1:end-1)
+    parserObj = nmeaParser("MessageId","RMC");
+    rmcData = parserObj(mnea);
+    latitude2 = rmcData.Latitude;
+    longitude2 = rmcData.Longitude; 
+    fclose(fileID);
+    gpsData = struct( ...
+        "long1", longitude1, ...
+        "lat1", latitude1, ...
+        "long2", longitude2, ...
+        "lat2", latitude2);
+end
