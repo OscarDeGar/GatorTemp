@@ -2,7 +2,9 @@ function gpsData = senseGPS(obj)
 %%% Read GPS data from U-Center output file
  % OUTPUTS: gpsData(struct) - longitude, latitude data
     %%$ Read Data
-    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_1_Data.ubx");
+    %fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_1_Data.ubx");
+    format long
+    fileID = fopen("C:\Users\cbabe\Documents\GATOR\GatorTemp\Gator Summer\Setup\test1.ubx",'r')
     corrections=fscanf(fileID,'%c');
     parserObj = nmeaParser("MessageId","RMC");
     size(parserObj);
@@ -12,9 +14,7 @@ function gpsData = senseGPS(obj)
     longitude1 = rmcData(end).Longitude;
     gpsTime = rmcData(end).UTCDateTime
     fclose(fileID);
-
-
-    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_2_Data.ubx",'r');
+    fileID = fopen("C:\Users\cbabe\Documents\GATOR\GatorTemp\Gator Summer\Setup\test2.ubx",'r');
     corrections=fscanf(fileID,'%c');
     pnmea = nmeaParser("MessageId","RMC");
     rmcData = pnmea(corrections);
