@@ -1,0 +1,23 @@
+function objects =  setup(joystickOpt)
+%%% General setup function
+ % Inputs: joystickOpt(bool) - determine whether to setup joystick
+ % Outputs: objects(struct) - contains all object types of sensors and
+ % controllers
+    
+ % Obtain objects for hardware
+    GPS = setupGPS();
+    disp('GPS CONNNECTED')
+    Mega = setupMega();
+    disp('MEGA CONNNECTED')
+    % lidar = setupLidar();
+    % disp('LIDAR CONNNECTED')
+    if joystickOpt
+        joystick = setupJoystick();
+    end
+    
+ % Package objects
+     objects = struct(...
+         "GPS", GPS);
+       % "lidar",lidar,...
+    
+end

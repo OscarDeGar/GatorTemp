@@ -5,10 +5,12 @@ function senseData = sense(objects)
 
  % Capture Data
 %  teensyData = senseTeensy(objects.teensy);
- gpsData = senseGPS(objects.GPS);
+    gpsData = senseGPS(objects.GPS);
 %  cameraData = senseCamera(objects.camera);
 %  lidarData = senseLidar(objects.lidar);
-%  joystickData = senseJoysticl(objects.joystick);
+    if objects.joystick
+        joystickData = senseJoystick(objects.joystick);
+    end
  
  % Package Data
  senseData = struct( ...
