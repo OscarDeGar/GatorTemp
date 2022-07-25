@@ -2,7 +2,7 @@ function joystickData = senseJoystick(joystick)
 %%% Intake data from joystick
  % INPUTS: joystick(object) - joystick object
  % OUTPUTS: joystickData(struct) - throttle, steer, and maxSpeed
- %          throttleSpeedfloat) - range of -1 to 1 representing speed
+ %          throttleSpeed(float) - range of -1 to 1 representing speed
  %          steerAngle(float) - range of -1 to 1 representing angle L to R
  %          maxSpeed(float) - range of -1 to 1 representing our max speed
 

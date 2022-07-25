@@ -1,0 +1,40 @@
+LOGITECH F310 BUTTON MAPPINGS MATLAB
+
+Directinput Mode:
+	Axis:
+	    1) L-Stick (L-R) (-1->1)
+	    2) L-Stick (U-D) (-1->1)
+	    3) R-Stick (L-R) (-1->1)
+            4) R-Stocl (U-D) (-1->1)
+	Buttons:
+	    1) X
+	    2) A
+	    3) B
+	    4) Y
+	    5) L-Bumper
+	    6) R-Bumper
+	    7) L-Trigger
+	    8) R-Trigger
+	    9) Back
+	    10) Start
+	    11) L-Stick Press
+	    12) R-Stick Press
+
+Xinput Mode:
+	Axis:
+	    1) L-Stick (L-R)
+	    2) L-Stick (U-D)
+	    3) L-Trigger (0-1) & R-Trigger (-1-0), SUM of the two
+	    4) R-Stick (L-R)
+            5) R-Stocl (U-D)
+	Buttons:
+	    1) A
+	    2) B
+	    3) X
+	    4) Y
+	    5) L-Bumper
+	    6) R-Bumper
+	    7) Back
+	    8) Start
+	    9) L-Stick Press
+	    10) R-Stick Press
