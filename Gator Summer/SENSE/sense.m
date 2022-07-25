@@ -1,10 +1,9 @@
 function senseData = sense(objects)
 %%% Genral Sense function
- % INPUT: objects(struct) - Teensy, GPS, Camera
+ % INPUT: objects(struct) - Mega, Gps
  % OUTPUT: sensorData(struct) - sensor data
 
  % Capture Data
-%  teensyData = senseTeensy(objects.teensy);
     gpsData = senseGPS(objects.GPS);
 %  cameraData = senseCamera(objects.camera);
 %  lidarData = senseLidar(objects.lidar);
