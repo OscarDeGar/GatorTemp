@@ -6,12 +6,11 @@ function joystickData = senseJoystick(joystick)
  %          steerAngle(float) - range of -1 to 1 representing angle L to R
  %          maxSpeed(float) - range of -1 to 1 representing our max speed
 
-    throttleSpeed = axis(joystick,2);   % Motor speed
+    throttle = axis(joystick,2);   % Motor speed
     steerAngle = axis(joystick,1);   % Steering angle
-    %maxSpeed = axis(joystick,3);        % Maximum speed allowed
+    maxSpeed = axis(joystick,3);        % Maximum speed allowed
 
-    joystickData = struct("Steer", steerAngle);
-%         "throttle", throttleSpeed, ...
-%         "max", maxSpeed);
-
+    joystickData = struct("steer", steerAngle,...
+        "throttle", throttle, ...
+        "max", maxSpeed);
 end
