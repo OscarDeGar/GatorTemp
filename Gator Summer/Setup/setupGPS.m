@@ -1,4 +1,4 @@
-function GPS = setupGPS()
+function setupGPS()
 %%% Setup function for GPS
  % OUTPUT: GPS(object) - vrjoystick object
  %TODO
@@ -27,5 +27,4 @@ function GPS = setupGPS()
     disp('Password: deere850')
     disp('Press any key to continue')
     pause
-    GPS=1;
 end
