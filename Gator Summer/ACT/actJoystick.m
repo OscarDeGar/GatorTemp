@@ -5,7 +5,7 @@ function actJoystick(mega, joystickData)
  % Convert Steering Command to angle
  steerAng = mapfun(joystickData.steer,1,-1,0.1,0.9);
  if joystickData.throttle <= 0
-    throttle_gas = mapfun(joystickData.throttle,-1,0,3.6,2.4);  % Pos = gas
+    throttle_gas = mapfun(joystickData.throttle,-1,0,3.3,2.4);  % Pos = gas
     throttle_brake=2.4;
  else
      throttle_gas=2.4;
