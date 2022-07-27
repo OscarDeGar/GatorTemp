@@ -1,6 +1,5 @@
-function [latVector,lonVector]=PlotGPSlog(file)
 % Opens the file gpsLog.txt with read access.
-fileID = fopen(file,'r');
+fileID = fopen("C:\Users\cbabe\Documents\GATOR\GatorTemp\RTK_GPS\GPS_1_Data.ubx",'r');
 % Read the text file.
 gpsData = fscanf(fileID,'%c');
 parserObj = nmeaParser('MessageId','RMC');
@@ -24,6 +23,7 @@ end
 % satellite fix.
 latVector = latVector(~isnan(latVector));
 lonVector = lonVector(~isnan(lonVector));
+
 
 % Plot the position in geographic coordinates
 geoplot(latVector,lonVector,'Marker',"*",'MarkerSize',3, ...
