@@ -2,25 +2,10 @@ function actJoystick(mega, joystickData)
 %%% Write Joystick commands to motors/actuators
  % INPUT: joystickData(struct) - steerAng, throttle commands
 
- % Check for increase or decrease in speed
- global maxSpeed;
- if joystickData.upSpeed
-    maxSpeed = maxSpeed + 0.05;
- elseif joystickData.downSpeed
-    maxSpeed = maxSpeed - 0.05;
- end
- 
- % Check for upper and lower bounds of maxSpeed
- if maxSpeed > 3.5
-     maxSpeed = 3.5;
- elseif maxSpeed < 3.3
-     maxSpeed = 3.3;
- end
- 
  % Convert Steering Command to angle
  steerAng = mapfun(joystickData.steer,1,-1,0.1,0.9);
  if joystickData.throttle <= 0
-    throttle_gas = mapfun(joystickData.throttle,-1,0,maxSpeed,2.4);  % Pos = gas
+    throttle_gas = mapfun(joystickData.throttle,-1,0,3.3,2.4);  % Pos = gas
     throttle_brake=2.4;
  else
      throttle_gas=2.4;

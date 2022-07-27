@@ -9,28 +9,27 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
 %     gpsData = senseData.gps;
 %     lidarData = senseData.gps;
 %     joystickData = senseData.joystick;
-    [CurrentPosHead] = currentAngleGPS(senseData.gpsData);
+    
+    %%% SAFETY CHECK
+   
+    %%% GET VECTOR
+    
     % Get Destination Vector
-    destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
+        destVec = gpsAngle(senseData.gpsData, waypoints, wayStep);
     % Check distance to waypoint 
-     throttle = 0.5; 
-
-     steer= destVec.bear;
-     if steer>30
-         steer=30;
-     end
-     if steer<-30
-         steer=-30;
-     end
-     motorControls  = struct( ...
-        "throttle", throttle,...
-        "steer",steer);
-
-     if destVec.dist < 0.5 %meters?
+     if destVec.dist < 0.1 %meters?
         wayStep = wayStep + 1;
      end
+     throttle = 1; 
+     steer= mapfun(destVec.bear,180,-180,0.1,0.9); %volts
+        motorControls  = struct( ...
+        "throttle", throttle,...
+        "steer",steer);
     % Initial heading for first point
-
+%     if isempty(masterHeading)
+%          [destVec.bear wayStep];
+%     end
+    
     % lidar obstacle avoidance to alter heading
 %     bearOA = lidarOA(lidarData, destVec.bear);
 

@@ -8,16 +8,29 @@ function megaObjects = setupMega(comport)
     disp('Warning! RoboClaw must be OFF before runnin this code');
 
 % Configure Pins
+
+    % Driving
     steerMotor = servo(mega, 'D2', 'MinPulseDuration', 10*10^-6, 'MaxPulseDuration', 1925*10^-6);
     DACcontrol = device(mega,'SPIChipSelectPin','D10','bitorder','lsbfirst','bitrate',200000);
     writeDAC = 'D49';
     DACoutputselet1 = 'D48';
     DACoutputselet2 = 'D47';
-    redLight = 'D22';
-    yellowLight = 'D23';
-    greenLight = 'D24';
-    blueLight = 'D25';
-    whiteLight = 'D26';
+    
+    % Lights
+    redLight = 'D26';
+    orangeLight = 'D23';
+    greenLight = 'D22';
+    blueLight = 'D24';
+    whiteLight = 'D25';
+    configurePin(mega,redLight,'DigitalOutput');
+    configurePin(mega,orangeLight,'DigitalOutput');
+    configurePin(mega,greenLight,'DigitalOutput');
+    configurePin(mega,blueLight,'DigitalOutput');
+    configurePin(mega,whiteLight,'DigitalOutput');
+    disp('Lights ON = CONNECTED')
+    
+    
+    
 
 % RoboClaw in R-C Mode expects to start up with joystick centered
 % In MATLAB function servo position is 0-1 so 0.5 (1520 ms) is centered
@@ -34,7 +47,7 @@ function megaObjects = setupMega(comport)
         "DACoutput1",DACoutputselet1,...
         "DACoutput2",DACoutputselet2,...
         "redLight",redLight,...
-        "yellowLight",yellowLight,...
+        "orangeLight",orangeLight,...
         "greenLight",greenLight,...
         "blueLight",blueLight,...
         "whiteLight",whiteLight);

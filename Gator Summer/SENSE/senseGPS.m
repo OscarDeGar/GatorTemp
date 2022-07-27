@@ -12,7 +12,7 @@ function gpsData = senseGPS(obj)
     size(rmcData);
     latitude1 = rmcData(end).Latitude;
     longitude1 = rmcData(end).Longitude;
-    gpsTime = rmcData(end).UTCDateTime
+   % gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
     fileID = fopen("C:\Users\cbabe\Documents\GATOR\GatorTemp\Gator Summer\Setup\test2.ubx",'r');
     corrections=fscanf(fileID,'%c');
@@ -21,7 +21,7 @@ function gpsData = senseGPS(obj)
     size(rmcData)
     latitude2 = rmcData(end).Latitude;
     longitude2 = rmcData(end).Longitude; 
-     gpsTime = rmcData(end).UTCDateTime
+   %  gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
     gpsData = struct( ...
         "long1", longitude1, ...

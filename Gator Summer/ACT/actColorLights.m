@@ -7,14 +7,14 @@ function actColorLights(mega, lightNum, signal)
  % Send High Pulse to flip on/off light
  switch lightNum
      case 1 % RED LIGHT
-        writeDigitalPin(mega.mega,mega.mega.redLight,signal)
-     case 2 % YELLOW LIGHT
-        writeDigitalPin(mega.mega,mega.mega.yellowLight,signal)
+        writeDigitalPin(mega.mega,mega.redLight,signal)
+     case 2 % ORANGE LIGHT
+        writeDigitalPin(mega.mega,mega.orangeLight,signal)
      case 3 % GREEN LIGHT
-        writeDigitalPin(mega.mega,mega.mega.greenLight,signal) 
+        writeDigitalPin(mega.mega,mega.greenLight,signal) 
      case 4 % BLUE LIGHT
-        writeDigitalPin(mega.mega,mega.mega.blueLight,signal)
+        writeDigitalPin(mega.mega,mega.blueLight,signal)
      case 5 % WHITE LIGHT
-        writeDigitalPin(mega.mega,mega.mega.whiteLight,signal)
+        writeDigitalPin(mega.mega,mega.whiteLight,signal)
  end
 end
