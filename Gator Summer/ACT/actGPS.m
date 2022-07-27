@@ -1,16 +1,17 @@
-function actGPS(mega, joystickData)
-%%% Write Joystick commands to motors/actuators
- % INPUT: joystickData(struct) - steerAng, throttle commands
+function actGPS(mega, Motercontrols)
+%%% Write Motercontrols commands to motors/actuators
+ % INPUT: Motercontrols(struct) - steerAng, throttle commands
 
  % Convert Steering Command to angle
- steerAng = mapfun(joystickData.steer,1,-1,0.1,0.9);
- if joystickData.throttle <= 0
-    throttle_gas = mapfun(joystickData.throttle,-1,0,3.3,2.4);  % Pos = gas
+ mapfun(Motercontrols.steer,30,-30,0.1,0.9); %volts
+ if Motercontrols.throttle <= 0
+    throttle_gas = mapfun(Motercontrols.throttle,0,1,3.3,2.4);  % Pos = gas
     throttle_brake=2.4;
- else
-     throttle_gas=2.4;
-    throttle_brake = mapfun(joystickData.throttle,0,1,2.2,3.6); % Neg = brake
  end
+%  else
+%      throttle_gas=2.4;
+%     throttle_brake = mapfun(Motercontrols.throttle,0,0,2.2,3.6); % Neg = brake
+%  end
 
  % Write Commands
  writePosition(mega.steer,steerAng);
