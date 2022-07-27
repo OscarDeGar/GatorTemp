@@ -8,8 +8,6 @@ function megaObjects = setupMega(comport)
     disp('Warning! RoboClaw must be OFF before runnin this code');
 
 % Configure Pins
-
-    % Driving
     steerMotor = servo(mega, 'D2', 'MinPulseDuration', 10*10^-6, 'MaxPulseDuration', 1925*10^-6);
     DACcontrol = device(mega,'SPIChipSelectPin','D10','bitorder','lsbfirst','bitrate',200000);
     writeDAC = 'D49';
@@ -22,13 +20,6 @@ function megaObjects = setupMega(comport)
     greenLight = 'D22';
     blueLight = 'D24';
     whiteLight = 'D25';
-    configurePin(mega,redLight,'DigitalOutput');
-    configurePin(mega,orangeLight,'DigitalOutput');
-    configurePin(mega,greenLight,'DigitalOutput');
-    configurePin(mega,blueLight,'DigitalOutput');
-    configurePin(mega,whiteLight,'DigitalOutput');
-    disp('Lights ON = CONNECTED')
-    
     
     
 
