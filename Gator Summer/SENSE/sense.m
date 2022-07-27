@@ -4,16 +4,18 @@ function senseData = sense(objects)
  % OUTPUT: sensorData(struct) - sensor data
 
  % Capture Data
-    gpsData = senseGPS(objects.GPS);
+%     gpsData1 = senseGPS(objects.GPS1,1);
+%     gpsData2 = senseGPS(objects.GPS2,2);
+gpsData=senseGPS();
 %  cameraData = senseCamera(objects.camera);
 %  lidarData = senseLidar(objects.lidar);
-    if objects.joystick
-        joystickData = senseJoystick(objects.joystick);
-    end
  
  % Package Data
+%  senseData = struct( ...
+%      "gpsData1", gpsData1,...
+%      "gpsData2", gpsData2);
  senseData = struct( ...
-     "gps", gpsData);
+     "gpsData", gpsData);
          %      "teensy", teensyData, ...
 %      "camera", cameraData, ...
 %      "lidar", lidarData, ...
