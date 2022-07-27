@@ -9,7 +9,7 @@ function actGPS(mega, Motercontrols)
     throttle_brake=2.4;
  else
      throttle_gas=2.4;
-    throttle_brake = mapfun(Motercontrols.throttle,-1,0,2.2,3.6); % Neg = brake
+    throttle_brake = mapfun(Motercontrols.throttle,0,0,2.2,3.6); % Neg = brake
  end
 
  % Write Commands

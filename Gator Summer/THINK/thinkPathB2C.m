@@ -26,7 +26,7 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
         "throttle", throttle,...
         "steer",steer);
 
-     if destVec.dist < 0.1 %meters?
+     if destVec.dist < 0.5 %meters?
         wayStep = wayStep + 1;
      end
     % Initial heading for first point
