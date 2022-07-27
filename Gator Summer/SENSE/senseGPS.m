@@ -9,7 +9,6 @@ function gpsData = senseGPS(obj)
     parserObj = nmeaParser("MessageId","RMC");
     size(parserObj);
     rmcData = parserObj(corrections);
-    size(rmcData);
     latitude1 = rmcData(end).Latitude;
     longitude1 = rmcData(end).Longitude;
    % gpsTime = rmcData(end).UTCDateTime;
@@ -18,7 +17,6 @@ function gpsData = senseGPS(obj)
     corrections=fscanf(fileID,'%c');
     pnmea = nmeaParser("MessageId","RMC");
     rmcData = pnmea(corrections);
-    size(rmcData)
     latitude2 = rmcData(end).Latitude;
     longitude2 = rmcData(end).Longitude; 
    %  gpsTime = rmcData(end).UTCDateTime;
