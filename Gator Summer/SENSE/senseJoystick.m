@@ -6,9 +6,15 @@ function joystickData = senseJoystick(joystick)
  %          steerAngle(float) - range of -1 to 1 representing angle L to R
  %          maxSpeed(float) - range of -1 to 1 representing our max speed
 
-    throttle = axis(joystick,2);   % Motor speed
+    throttle = axis(joystick,2);     % Motor speed
     steerAngle = axis(joystick,3);   % Steering angle
+    downSpeed = button(joystick,7);  % Decrease Max Speed
+    upSpeed = button(joystick,8);    % Increase Max Speed
+    maxSpeed = 3.3;                  % Default Speed Value
 
     joystickData = struct("steer", steerAngle,...
-        "throttle", throttle);
+        "throttle", throttle,...
+        "downSpeed", downSpeed,...
+        "upSpeed", upSpeed,...
+        "maxSpeed", maxSpeed);
 end
