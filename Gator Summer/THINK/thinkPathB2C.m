@@ -13,7 +13,7 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
     % Get Destination Vector
     destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
     % Check distance to waypoint 
-     throttle = 0.5; 
+     throttle = 1; 
 
      steer= destVec.bear;
      if steer>30
@@ -26,7 +26,7 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
         "throttle", throttle,...
         "steer",steer);
 
-     if destVec.dist < 0.5 %meters?
+     if destVec.dist < 3.5 %meters
         wayStep = wayStep + 1;
      end
     % Initial heading for first point

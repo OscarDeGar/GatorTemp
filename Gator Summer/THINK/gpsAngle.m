@@ -23,6 +23,9 @@ function destVec = gpsAngle(CurrentPosHead, waypoints, counter)
     X = cos(lat2) * sin(lon2-lon1);
     Y = cos(lat1) * sin(lat2) - sin(lat1)*cos(lat2)*cos(lon2-lon1);
     bear = atan2(X, Y) * 180/pi;
+    if bear<0
+        bear=360+bear;
+    end
     adjustedbear=bear-CurrentPosHead.bear;
     % struct return
     destVec = struct( ...
