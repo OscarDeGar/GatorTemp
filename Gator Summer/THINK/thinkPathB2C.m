@@ -9,32 +9,52 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
 %     gpsData = senseData.gps;
 %     lidarData = senseData.gps;
 %     joystickData = senseData.joystick;
-    [CurrentPosHead] = currentAngleGPS(senseData.gpsData);
+
+    % Get current angle we're facing
+        [CurrentPosHead] = currentAngleGPS(senseData.gpsData);
+
     % Get Destination Vector
-    destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
+        destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
+
+    % Check for next waypoint distance
+        nextDestVec = gpsAngle(CurrentPosHead, waypoints, wayStep+1);
+
     % Check distance to waypoint 
-     throttle = 1; 
+        throttle = 1; 
+        
+        if nextDestVec.dist < destVec
+            steer = newDesVec.bear;
+            if steer>30
+                steer=30;
+            end
+            if steer<-30
+                steer=-30;
+            end
+            wayStep = wayStep + 1; % Skip to next waypoint
+        else
+            steer= destVec.bear;
+            if steer>30
+                steer=30;
+            end
+            if steer<-30
+                steer=-30;
+            end
+        end
+        
+        motorControls  = struct( ...
+           "throttle", throttle,...
+           "steer",steer);
+    
+        if destVec.dist < 3.5 %meters
+           wayStep = wayStep + 1;
+        end
 
-     steer= destVec.bear;
-     if steer>30
-         steer=30;
-     end
-     if steer<-30
-         steer=-30;
-     end
-     motorControls  = struct( ...
-        "throttle", throttle,...
-        "steer",steer);
 
-     if destVec.dist < 3.5 %meters
-        wayStep = wayStep + 1;
-     end
-    % Initial heading for first point
-
-    % lidar obstacle avoidance to alter heading
-%     bearOA = lidarOA(lidarData, destVec.bear);
-
-    % combine lidarOA and gps heading
+    
+        % lidar obstacle avoidance to alter heading
+    %     bearOA = lidarOA(lidarData, destVec.bear);
+    
+        % combine lidarOA and gps heading
     
 
 
