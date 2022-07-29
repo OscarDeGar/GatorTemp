@@ -18,23 +18,27 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
         
     % Check distance to waypoint 
         throttle = 1; 
-        steer= destVec.bear;
-        if steer>30
-            steer=30;
+        steer= destVec.bear
+        if steer>50
+            steer=50;
         end
-        if steer<-30
-            steer=-30;
+        if steer<-50
+            steer=-50;
+        end
+        if steer<5 && steer>-5
+            steer=0;
         end
         
+        
+    
+        if destVec.dist < 1.5 || destVec.bear>90 ||  destVec.bear<-90 %meters
+           wayStep = wayStep + 1;
+          % [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
+        end
+
         motorControls  = struct( ...
            "throttle", throttle,...
            "steer",steer);
-    
-        if destVec.dist < 3.5 || (destVec.bear<270 && destVec.bear>90)%meters
-           wayStep = wayStep + 1;
-        end
-
-
     
         % lidar obstacle avoidance to alter heading
     %     bearOA = lidarOA(lidarData, destVec.bear);

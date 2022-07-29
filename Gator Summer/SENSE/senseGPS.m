@@ -4,34 +4,33 @@ function gpsData = senseGPS(obj)
     %%$ Read Data
     parserObj = nmeaParser("MessageId","RMC");
     format long
-    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Left.ubx",'r');
+    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Right.ubx",'r');
     corrections=fscanf(fileID,'%c');
     k = strfind(corrections,"$GNRMC");
-    for i=1:size(k,2)-1
-        singlecorrection=corrections(k(end-i):k(end-i)+68);
+        singlecorrection=corrections(k(end-1):k(end-1)+136);
         rmcData = parserObj(singlecorrection);
         if rmcData.Status == 0
             latitude1 = rmcData(end).Latitude;
             longitude1 = rmcData(end).Longitude;
-            break
+        else
+             latitude1=0;
+             longitude1=0;
         end
-    end
     
    % gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
-    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Right.ubx",'r');
+    fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Left.ubx",'r');
     corrections=fscanf(fileID,'%c');
      k = strfind(corrections,"$GNRMC");
-   for i=1:size(k,2)-1
-        singlecorrection=corrections(k(end-i):k(end-i)+68);
-        parserObj = nmeaParser("MessageId","RMC");
+        singlecorrection=corrections(k(end-1):k(end-1)+136);
         rmcData = parserObj(singlecorrection);
         if rmcData.Status == 0
             latitude2 = rmcData(end).Latitude;
             longitude2 = rmcData(end).Longitude;
-            break
+        else
+             latitude2=0;
+             longitude2=0;
         end
-    end
    %  gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
     gpsData = struct( ...

@@ -3,10 +3,10 @@ function actGPS(mega, motorControls,oldmotorControls)
  % INPUT: Motercontrols(struct) - steerAng, throttle commands
 
  % Convert Steering Command to angle
- steerAng=mapfun(motorControls.steer,30,-30,0.4,0.6); %
-  if motorControls.throttle~=oldmotorControls.throttle
+ steerAng=mapfun(motorControls.steer,50,-50,0.2,0.8) %
+  %if motorControls.throttle~=oldmotorControls.throttle
         if motorControls.throttle >= 0
-        throttle_gas = mapfun(motorControls.throttle,0,1,2.2,3.1);  % Pos = gas
+        throttle_gas = mapfun(motorControls.throttle,0,1,2.2,3.2);  % Pos = gas
         throttle_brake=2.2;
         else
          throttle_gas=2.4;
@@ -14,7 +14,7 @@ function actGPS(mega, motorControls,oldmotorControls)
         end
         
         % Write Commands
-        writePosition(mega.steer,steerAng);
+        writePosition(mega.steer,steerAng)
         convertedvoltage1=round(throttle_gas*255/5);
         writeShiftRegister( ...
          mega.mega, ...
@@ -36,7 +36,7 @@ function actGPS(mega, motorControls,oldmotorControls)
          convertedvoltage2, ...
          1 ...
         ); % Brake
-  end
+ % end
 end
 
 function output = mapfun(value,fromLow,fromHigh,toLow,toHigh)
@@ -44,7 +44,7 @@ function output = mapfun(value,fromLow,fromHigh,toLow,toHigh)
 end
 
 function writeShiftRegister(obj,serialobj,writeDAC,sel1Pin, sel2Pin,k,select)
-    if 0>k||k>255
+    if (0>k) || (k>255)
         warning("Writing number greater then 255 or less then")
     end
     if 0>select || select>3
