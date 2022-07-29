@@ -15,50 +15,22 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
 
     % Get Destination Vector
         destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
-
-    % Check for next waypoint distance
-        nextDestVec = gpsAngle(CurrentPosHead, waypoints, wayStep+1);
-
-    % Get Distance between current and next waypoint
-        curr = waypoints(:,wayStep);
-        next = wayStep(:,wayStep);
-        latCurr = curr(1);
-        lonCurr = curr(2);
-        latNext = next(1);
-        lonNext = next(2);
-        distWaypoints = acos(sin(latCurr)*sin(latNext) + ...
-            cos(latCurr)*cos(latNext)*cos(lonNext-lonCurr))*R;
-
-    % Trig to determine if perpindicular to waypoint, aka wayStep + 1
-        angAgainstWaypoint = atand(nextDestVec.dist/distWaypoints);
         
     % Check distance to waypoint 
         throttle = 1; 
-        
-        if angAgainstWaypoint < 120
-            steer = newDesVec.bear;
-            if steer>30
-                steer=30;
-            end
-            if steer<-30
-                steer=-30;
-            end
-            wayStep = wayStep + 1; % Skip to next waypoint
-        else
-            steer= destVec.bear;
-            if steer>30
-                steer=30;
-            end
-            if steer<-30
-                steer=-30;
-            end
+        steer= destVec.bear;
+        if steer>30
+            steer=30;
+        end
+        if steer<-30
+            steer=-30;
         end
         
         motorControls  = struct( ...
            "throttle", throttle,...
            "steer",steer);
     
-        if destVec.dist < 3.5 %meters
+        if destVec.dist < 3.5 || (destVec.bear<270 && destVec.bear>90)%meters
            wayStep = wayStep + 1;
         end
 

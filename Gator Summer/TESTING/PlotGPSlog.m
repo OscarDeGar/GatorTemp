@@ -5,7 +5,7 @@ fileID = fopen(file,'r');
 gpsData = fscanf(fileID,'%c');
 parserObj = nmeaParser('MessageId','RMC');
 % Parse the NMEA Data.
-ggaData = parserObj(gpsData)
+ggaData = parserObj(gpsData);
 % Initialize variables.
 latVector = zeros(1,numel(ggaData));
 lonVector = zeros(1,numel(ggaData));
