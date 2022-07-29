@@ -36,10 +36,7 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
         throttle = 1; 
         
         if angAgainstWaypoint < 120
-            steer = newDestVec.bear;
-            if newDestVec.bear < 2 
-                steer = 0;
-            end
+            steer = newDesVec.bear;
             if steer>30
                 steer=30;
             end
@@ -50,7 +47,7 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
         else
             steer = destVec.bear;
             if destVec.bear < 2 
-                steer = 0;
+                destVec.
             end
             if steer>30
                 steer=30;
