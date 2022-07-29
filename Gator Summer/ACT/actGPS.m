@@ -1,15 +1,15 @@
-function actGPS(mega, Motercontrols)
+function actGPS(mega, motorControls)
 %%% Write Motercontrols commands to motors/actuators
  % INPUT: Motercontrols(struct) - steerAng, throttle commands
 
  % Convert Steering Command to angle
- steerAng=mapfun(Motercontrols.steer,30,-30,0.4,0.6); %volts
- if Motercontrols.throttle >= 0
-    throttle_gas = mapfun(Motercontrols.throttle,0,1,2.2,3.1);  % Pos = gas
+ steerAng=mapfun(motorControls.steer,30,-30,0.4,0.6); %
+ if motorControls.throttle >= 0
+    throttle_gas = mapfun(motorControls.throttle,0,1,2.2,3.1);  % Pos = gas
     throttle_brake=2.2;
  else
      throttle_gas=2.4;
-    throttle_brake = mapfun(Motercontrols.throttle,-1,0,2.2,3.6); % Neg = brake
+    throttle_brake = mapfun(motorControls.throttle,-1,0,2.2,3.6); % Neg = brake
  end
 
  % Write Commands
