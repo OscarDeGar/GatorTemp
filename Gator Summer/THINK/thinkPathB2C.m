@@ -40,11 +40,3 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
            "throttle", throttle,...
            "steer",steer);
     
-        % lidar obstacle avoidance to alter heading
-    %     bearOA = lidarOA(lidarData, destVec.bear);
-    
-        % combine lidarOA and gps heading
-    
-
-
-end
