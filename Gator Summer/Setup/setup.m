@@ -1,8 +1,6 @@
 function objects =  setup()
 %%% General setup function
- % Inputs: joystickOpt(bool) - determine whether to setup joystick
- % Outputs: objects(struct) - contains all object types of sensors and
- % controllers
+ % OUTPUT: objects(struct) - object types of sensors and controllers
     
  % Create Objects/Setup Hardware
     GPS = setupGPS();

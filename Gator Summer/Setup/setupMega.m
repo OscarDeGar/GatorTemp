@@ -1,11 +1,11 @@
 function megaObjects = setupMega(comport)
 %%% Setup Arduino Mega for Motor and Actuator control.
  % INPUT: comport(string) - Comport being used
- % OUTPUT: megaObjects(struct) - Mega, individual servo objects, etc
+ % OUTPUT: megaObjects(struct) - Mega, pins, objects, etc.
     
  % Connect Arduino
     mega = arduino(comport,'Mega2560','Libraries',{'SPI', 'Servo'});
-    disp('Warning! RoboClaw must be OFF before runnin this code');
+    disp('Warning! RoboClaw must be OFF before running this code');
 
 % Configure Pins
 
@@ -29,9 +29,6 @@ function megaObjects = setupMega(comport)
     configurePin(mega,whiteLight,'DigitalOutput');
     disp('Lights ON = CONNECTED')
     
-    
-    
-
 % RoboClaw in R-C Mode expects to start up with joystick centered
 % In MATLAB function servo position is 0-1 so 0.5 (1520 ms) is centered
     writePosition(steerMotor, 0.5);     % always start servo-command at 0.5

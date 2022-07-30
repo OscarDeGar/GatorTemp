@@ -1,38 +1,44 @@
-function gpsData = senseGPS(obj)
+function gpsData = senseGPS()
 %%% Read GPS data from U-Center output file
- % OUTPUTS: gpsData(struct) - longitude, latitude data
-    %%$ Read Data
+ % OUTPUT: gpsData(struct) - longitude, latitude data
+ 
+ %%% Read Data
+
+    % RIGHT GPS
     parserObj = nmeaParser("MessageId","RMC");
     format long
     fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Right.ubx",'r');
     corrections=fscanf(fileID,'%c');
     k = strfind(corrections,"$GNRMC");
-        singlecorrection=corrections(k(end-1):k(end-1)+136);
-        rmcData = parserObj(singlecorrection);
-        if rmcData.Status == 0
-            latitude1 = rmcData(end).Latitude;
-            longitude1 = rmcData(end).Longitude;
-        else
-             latitude1=0;
-             longitude1=0;
-        end
-    
+    singlecorrection=corrections(k(end-1):k(end-1)+136);
+    rmcData = parserObj(singlecorrection);
+    if rmcData.Status == 0
+        latitude1 = rmcData(end).Latitude;
+        longitude1 = rmcData(end).Longitude;
+    else
+        latitude1=0;
+        longitude1=0;
+    end
    % gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
+
+    % LEFT GPS
     fileID = fopen("C:\Users\Skull\Documents\GatorTemp\RTK_GPS\GPS_Test_Parkinglot_Left.ubx",'r');
     corrections=fscanf(fileID,'%c');
-     k = strfind(corrections,"$GNRMC");
+    k = strfind(corrections,"$GNRMC");
         singlecorrection=corrections(k(end-1):k(end-1)+136);
         rmcData = parserObj(singlecorrection);
-        if rmcData.Status == 0
-            latitude2 = rmcData(end).Latitude;
-            longitude2 = rmcData(end).Longitude;
-        else
-             latitude2=0;
-             longitude2=0;
-        end
+    if rmcData.Status == 0
+        latitude2 = rmcData(end).Latitude;
+        longitude2 = rmcData(end).Longitude;
+    else
+        latitude2=0;
+        longitude2=0;
+    end
    %  gpsTime = rmcData(end).UTCDateTime;
     fclose(fileID);
+
+    % Package Data
     gpsData = struct( ...
         "lon1", longitude1, ...
         "lat1", latitude1, ...

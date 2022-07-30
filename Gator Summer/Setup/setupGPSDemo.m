@@ -1,7 +1,6 @@
 function objects = setupGPSDemo(COM)
-%%% General setup function
- % Outputs: objects(struct) - contains all object types of sensors and
- % controllers
+%%% General setup function for GPS DEMO
+ % OUTPUT: objects(struct) - object types of sensors and controllers
     
  % Create Objects/Setup Hardware
     Mega = setupMega(COM);

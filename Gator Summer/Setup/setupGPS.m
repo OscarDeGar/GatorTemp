@@ -1,6 +1,7 @@
 function setupGPS()
 %%% Setup function for GPS
  % OUTPUT: GPS(object) - vrjoystick object
+ 
  %TODO
     %Check if RTK correction is working by reading RTK pin on GPS on Arduino
     system("C:\Program Files (x86)\u-blox\u-center_v22.05\u-center.exe &");
