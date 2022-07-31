@@ -58,9 +58,10 @@ function [waypoints]=ConfigureWaypoint(gps1file,gps2file)
             if bear<-180
                 bear=360+bear;
             end
-            %Convert meters to latitude
-        middlelat(1,i)=middlelat(1,i)+ ((cosd(bear)*0.762) / R) * (180 / pi);%0.762 meters is the distance between the center of the gps's and the front axel
-        middlelon(1,i)= middlelon(1,i)+ ((sind(bear)*0.762) / R) * (180 / pi) / cos( middlelon(1,i) * pi/180);%+cosd(bear)*0.762;
+        new_latitude  = latitude  + (dy / r_earth) * (180 / pi);
+        new_longitude = longitude + (dx / r_earth) * (180 / pi) / cos(latitude * pi/180);
+        middlelat(1,i)=middlelat(1,i)+ ((sind(bear)*0.762) / r_earth) * (180 / pi);  ; %0.762 meters is the distance between the center of the gps's and the front axel
+        middlelon(1,i)=middlelon(1,i)%+cosd(bear)*0.762;
 
     end
     % Generate Middle Line
