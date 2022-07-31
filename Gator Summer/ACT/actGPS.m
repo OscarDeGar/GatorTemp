@@ -20,10 +20,9 @@ function actGPS(mega, motorControls,oldMotorControls)
          minWheelAng, ...           % Minimum Wheel Angle(FULL LEFT)
          maxWheelAng, ...           % Maximum Wheel Angle(FULL RIGHT)
          minSteering, ...           % Minimum Steering Value(FULL LEFT)
-         maxSterring)               % Maximum Steering Value(FULL RIGHT)
-
-  %if motorControls.throttle~=oldMotorControls.throttle
-
+         maxSterring);               % Maximum Steering Value(FULL RIGHT)
+    writePosition(mega.steer,steerAng)  % Write Steer Command
+  if motorControls.throttle~=oldMotorControls.throttle
     if motorControls.throttle >= 0  % Pos = gas
         throttle_gas = mapfun( ...
             motorControls.throttle, ...
@@ -44,7 +43,7 @@ function actGPS(mega, motorControls,oldMotorControls)
     end
     
     % Write Commands
-        writePosition(mega.steer,steerAng)  % Write Steer Command
+       
 
         convertedvoltage1=round(throttle_gas*255/5); 
         writeShiftRegister( ...             % Write Throttle
@@ -67,7 +66,7 @@ function actGPS(mega, motorControls,oldMotorControls)
          convertedvoltage2, ...
          1 ...
         ); % Brake
- % end
+  end
 end
 
 %%% HELPER FUNCTIONS

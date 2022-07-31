@@ -9,7 +9,6 @@ ggaData = parserObj(gpsData);
 % Initialize variables.
 latVector = zeros(1,numel(ggaData));
 lonVector = zeros(1,numel(ggaData));
-UTCDateTime = zeros(1,ggaData);
 for i=1:length(ggaData)
     % Check if the parsed GGA sentences are valid and if they are valid, get the
     % latitude and longitude from the output structures. Status = 0,
@@ -26,11 +25,11 @@ end
 % satellite fix.
 latVector = latVector(~isnan(latVector));
 lonVector = lonVector(~isnan(lonVector));
-
+%UTCDateTime = UTCDateTime(~ismissing(UTCDateTime));
 
 % Plot the position in geographic coordinates
 geoplot(latVector,lonVector,'Marker',"*",'MarkerSize',3, ...
     "Color",'blue','MarkerFaceColor','red');
 % Selects the basemap
-geobasemap 'topographic';
+%geobasemap 'topographic';
 end

@@ -1,4 +1,4 @@
-function setupGPS()
+function setupUcenterGPS()
 %%% Setup function for GPS
  % OUTPUT: GPS(object) - vrjoystick object
  
