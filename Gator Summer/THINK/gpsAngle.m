@@ -22,8 +22,8 @@ function destVec = gpsAngle(CurrentPosHead, waypoints, counter)
     % calculate bearing angle relative to true North (degs)
     X = cos(lat2) * sin(lon2-lon1);
     Y = cos(lat1) * sin(lat2) - sin(lat1)*cos(lat2)*cos(lon2-lon1);
-    bear = atan2(X, Y) * 180/pi;
-    adjustedbear=bear-CurrentPosHead.bear;
+    bear = atan2(X, Y) * 180/pi
+    adjustedbear=bear-CurrentPosHead.bear
     % struct return
     destVec = struct( ...
         "dist", dist,...

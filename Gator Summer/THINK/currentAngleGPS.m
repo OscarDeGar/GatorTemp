@@ -14,12 +14,14 @@ function [destVec] = currentAngleGPS(gpsData)
     X = cos(lat2) * sin(lon2-lon1);
     Y = cos(lat1) * sin(lat2) - sin(lat1)*cos(lat2)*cos(lon2-lon1);
     bear = atan2(X, Y) * 180/pi-90;
+    R = 6371000; % radius of Earth in meterss
     if bear<-180
         bear=360+bear;
     end
        middlelat=middlelat+ ((cosd(bear)*0.762) / R) * (180 / pi);%0.762 meters is the distance between the center of the gps's and the front axel
         middlelon= middlelon+ ((sind(bear)*0.762) / R) * (180 / pi) / cos( middlelon * pi/180);%
     % struct return
+    bear
     destVec = struct( ...
         "lat", middlelat,...
         "lon", middlelon,...

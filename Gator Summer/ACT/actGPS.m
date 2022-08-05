@@ -5,10 +5,10 @@ function actGPS(mega, motorControls,oldMotorControls)
  %         oldMotorControls(struct) - previous steerAng, throttle commands
 
  % Variable Decleration
-     minSteering = 0.2;     % Minimum Steering RoboClaw Value
-     maxSterring = 0.8;     % Maximum Steering RoboClaw Value
-     minWheelAng = 50;      % Minumum Wheel Angle(FULL LEFT)
-     maxWheelAng = -50;     % Maximum Wheel Angle(FULL RIGHT)
+     minSteering = 0.0;     % Minimum Steering RoboClaw Value
+     maxSterring = 1.0;     % Maximum Steering RoboClaw Value
+     minWheelAng = -30;      % Minumum Wheel Angle(FULL LEFT)
+     maxWheelAng = 30;     % Maximum Wheel Angle(FULL RIGHT)
      minThrottle = 2.2;     % Minimum Throttle Voltage
      minBrake = 2.2;        % Minimum Brake Voltage
      maxThrottle = 3.2;     % Maximum Throttle Voltage
@@ -22,7 +22,7 @@ function actGPS(mega, motorControls,oldMotorControls)
          minSteering, ...           % Minimum Steering Value(FULL LEFT)
          maxSterring);               % Maximum Steering Value(FULL RIGHT)
     writePosition(mega.steer,steerAng)  % Write Steer Command
-  if motorControls.throttle~=oldMotorControls.throttle
+  %if motorControls.throttle~=oldMotorControls.throttle
     if motorControls.throttle >= 0  % Pos = gas
         throttle_gas = mapfun( ...
             motorControls.throttle, ...
@@ -67,7 +67,7 @@ function actGPS(mega, motorControls,oldMotorControls)
          1 ...
         ); % Brake
   end
-end
+%end
 
 %%% HELPER FUNCTIONS
 
