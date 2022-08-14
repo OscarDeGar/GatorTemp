@@ -3,7 +3,7 @@ function [waypoints]=ConfigureWaypoint(gps1file,gps2file)
     [lat2,lon2,UTCDateTime2]=PlotGPSlog(gps2file);
     
     % Check Starts of Data
-    if  UTCDateTime1(1,1)< UTCDateTime2(1,1)
+    if  UTCDateTime1(1,1)==UTCDateTime2(1,1)
         for i=1:size(lat1,2)
             if  UTCDateTime1(1,i)==UTCDateTime2(1,1)
                 start=i;
@@ -44,7 +44,7 @@ function [waypoints]=ConfigureWaypoint(gps1file,gps2file)
     %Covert to middle front wheel
     middlelat=mean([lat1new; lat2new]);
     middlelon=mean([lon1new; lon2new]);
-    R = 6371000; % radius of Earth in meterss
+    R = 6371000; % radius of Earth in meters
     for i=1:size(middlelat,2)
         lat1 = lat1new(1,i) * pi/180; % latitude of current pos
         lon1 = lon1new(1,i) * pi/180; % longitude of current pos
