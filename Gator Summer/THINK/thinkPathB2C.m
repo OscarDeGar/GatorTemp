@@ -19,16 +19,15 @@ function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
     % Check distance to waypoint 
         throttle = 1; 
         steer= destVec.bear;
-        if steer>50
-            steer=50;
+        if steer>30
+            steer=30;
         end
-        if steer<-50
-            steer=-50;
+        if steer<-30
+            steer=-30;
         end
-        if steer<5 && steer>-5
+        if steer < 10 && steer > -10
             steer=0;
         end
-        
         
     
         if destVec.dist < 1.5 || destVec.bear>90 ||  destVec.bear<-90 %meters

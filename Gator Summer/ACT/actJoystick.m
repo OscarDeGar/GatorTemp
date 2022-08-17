@@ -28,8 +28,8 @@ function actJoystick(mega, joystickData)
  % Convert Steering Command to angle
      steerAng = mapfun( ...        % Steer Angle from joystick to RC value
          joystickData.steer, ...
-         1, ...                         % Min joystick value(LEFT)
-         -1, ...                        % Max joystick value(RIGHT)
+         -1, ...                         % Min joystick value(LEFT)
+         1, ...                        % Max joystick value(RIGHT)
          minSteering, ...               % Minimum Steering Value(LEFT)
          maxSterring);                  % Maximum Steering Value(Right)
 

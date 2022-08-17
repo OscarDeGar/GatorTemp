@@ -4,8 +4,8 @@ function senseData = sense(objects)
  % OUTPUT: sensorData(struct) - sensor data
 
  % Capture Data
-    gpsData1 = senseGPSstr(objects.GPS1);
-    gpsData2 = senseGPSstr(objects.GPS2);
+    gpsData1 = senseGPSstr(objects.GPS1)
+    gpsData2 = senseGPSstr(objects.GPS2)
     % cameraData = senseCamera(objects.camera);
     % lidarData = senseLidar(objects.lidar);
  
