@@ -72,8 +72,8 @@ function [waypoints,lat1new,lon1new,lat2new,lon2new, middlelatref,middlelonref]=
 
         end
         [Y,X,~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),deg2rad(latMid(i)),deg2rad(lonMid(i)));
-         Ymid(i)=Y+shift*sind(bear);
-         Xmid(i)=X+shift*cosd(bear);
+         Ymid(i)=Y-shift*sind(bear);
+         Xmid(i)=X-shift*cosd(bear);
         [Y1(i),X1(i),~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),lat1,lon1);
         [Y2(i),X2(i),~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),lat2,lon2);
 

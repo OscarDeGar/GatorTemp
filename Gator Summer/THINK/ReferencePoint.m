@@ -1,4 +1,4 @@
-function [destVec]= ReferencePoint(middlelatref,middlelonref,gpsData)
+function [destVec]= ReferencePoint(middlelatref,middlelonref,gpsData,shift)
         lat1 = gpsData.lat1 * pi/180; % latitude of current pos
         lon1 = gpsData.lon1 * pi/180; % longitude of current pos
         lat2 = gpsData.lat2* pi/180; % latitude of destination
@@ -11,9 +11,8 @@ function [destVec]= ReferencePoint(middlelatref,middlelonref,gpsData)
                 bear=360+bear;
             end
          [Y,X,~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),deg2rad(latMid),deg2rad(lonMid));
-         dist=-1;
-         Ymidback=Y+dist*sind(bear);
-         Xmidback=X+dist*cosd(bear);
+         Ymidback=Y-shift*sind(bear);
+         Xmidback=X-shift*cosd(bear);
         destVec = struct( ...
         "X", Xmidback,...
         "Y", Ymidback,...

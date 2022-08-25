@@ -1,4 +1,4 @@
-function destVec = gpsAngle(Xmid,Ymid, waypoints, counter,bear)
+function destVec =BicyclegpsAngle(Xmid,Ymid, waypoints, counter,bear,FronttoBack)
 %%% calculate heading of nearest GPS waypoint from pre-mappeed data
     % Inputs: gpsData(array) - contains data from GPS
     %         waypoints(array) - contains pre-mapped GPS waypoints
@@ -13,10 +13,11 @@ function destVec = gpsAngle(Xmid,Ymid, waypoints, counter,bear)
     Xdelta=Xdes-Xmid;
     Ydelta=Ydes-Ymid;
     nextwaypointbear = rad2deg(atan2(Ydelta, Xdelta));
+    steer1=nextwaypointbear-bear;
     dist=sqrt(Xdelta^2+Ydelta^2);
-    steer=nextwaypointbear-bear;
+    angle=atand((2*FronttoBack*sind(steer1))/dist); %https://thomasfermi.github.io/Algorithms-for-Automated-Driving/Control/PurePursuit.html
     % struct return
     destVec = struct( ...
         "dist", dist,...
-        "waypointbear",steer);
+        "waypointbear",angle);
 end
