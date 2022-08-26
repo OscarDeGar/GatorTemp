@@ -11,13 +11,13 @@ function   [motorControls, wayStep]=thinkPathB2C(CurrentPosHead, waypoints, wayS
        
     % Check distance to waypoint 
         throttle = 1;
-         head=destVec.waypointbear;
-         dist=destVec.dist;
-         steer=atand((2*FronttoBack*sind(head))/dist); %https://thomasfermi.github.io/Algorithms-for-Automated-Driving/Control/PurePursuit.html;
+         steer=destVec.waypointbear;
+         dist=destVec.dist ;
+         angle=atand((2*FronttoBack*sind(steer))/dist); %https://thomasfermi.github.io/Algorithms-for-Automated-Driving/Control/PurePursuit.html;
          motorControls  = struct( ...
            "throttle", throttle,...
            "steer",steer);
-         if dist < 1 || head>90 || head<-90 %meters
+         if destVec.dist < 1 || steer>90 || steer<-90 %meters
             %disp("Skiped Waypoint")
            wayStep = wayStep + 1;
            if wayStep<=size(waypoints,1)

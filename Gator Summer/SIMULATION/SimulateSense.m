@@ -8,7 +8,7 @@ X=CurrentPosHead.X;
 Y=CurrentPosHead.Y;
  %carLike = ackermannKinematics("WheelBase",1+frontwheelfromcenter); %distance meters between front and rear axel
  carLike=bicycleKinematics("VehicleInputs","VehicleSpeedSteeringAngle","WheelBase",FronttoBack);
-velo = motorControls.throttle*5;    % Constant linear velocity 1 m/s
+velo = motorControls.throttle*5;    % Constant linear velocity 5 m/s
 
 % Define the total time and sample rate 
 sampleTime = 0.005;                  % Sample time [s]
