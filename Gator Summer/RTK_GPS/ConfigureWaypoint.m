@@ -99,18 +99,4 @@ plot(X2(start:section),Y2(start:section),'-gd');
      legend({'Bearing','Center Back Axel','Left GPS','Right GPS'},'Location','southeast')
 hold off
 
-% hold on
-% 
-% figure(1)
-%  plot(lon1new(1,start:section),lat1new(1,start:section),'-yd');
-%  figure(1)
-%   plot(lonMid(start:section),latMid(start:section),'-md');
-%   figure(1)
-%  plot(lon2new(1,start:section),lat2new(1,start:section),'-gd');
-%  title("GPS Coordinates")
-%      xlabel('Longitude') 
-%     ylabel('Latitude') 
-%  legend({'Left GPS','Calculated Center Point','Right GPS'},'Location','southeast')
-% hold off
-
 end

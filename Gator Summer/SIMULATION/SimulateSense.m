@@ -21,7 +21,6 @@ tVec1 = 0:sampleTime:timeEnd1;      % Time array for unconstrained robot
 Xmidback=pose1(end,1);
 Ymidback=pose1(end,2);
 bear=rad2deg(pose1(end,3));
-plot(pose1(:,1),pose1(:,2),'-r')
  % Package Data
         destVec = struct( ...
         "X", Xmidback,...
