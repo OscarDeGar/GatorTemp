@@ -12,6 +12,10 @@ void setup()
 //Interference Delay is caused by competing chirps from the side-by-side twin sonars.
 //Need to test if returning chirps also cause interference, but for now ~1.5m separation = ~5 ms delay
 const int TwinDelay = 5; //ms
+//Current sonar's chirp might also echo and cause next sonar's to pick it up.
+//If sound coming off surrounding objects, 3m safe zone*2 = 6m rough travel = ~20ms delay 
+const int EchoDelay = 20; //ms
+
 
 
 // Currently assuming 2 Sonars mounted to the front of the vehicle.
@@ -52,6 +56,8 @@ void loop()
   delayMicroseconds(50);
   digitalWrite(currentDigital, HIGH);
   delayMicroseconds(50);
+  delay(TwinDelay);
+
 
   unsigned int distance = analogRead(currentAnalog);  //read the analog pin
   distance = distance*5000/1024/CALIBRATION; // Combining all into one line
@@ -59,7 +65,7 @@ void loop()
 
 //  distance = (unsigned int)(((unsigned long)distance * 5000)/1024);  //change from analog value to voltage
 //  distance = (unsigned int)((float)distance / 0.33f); //0.33mV equals to 1mm,
-//distance = (unsigned int)((float)distance / 0.2129f); //For new version, 0.2129mV equals to 1mm. 
+//  distance = (unsigned int)((float)distance / 0.2129f); //For new version, 0.2129mV equals to 1mm. 
 
   Serial.print("distance:");
   Serial.print(distance);
@@ -69,5 +75,5 @@ void loop()
   swap(currentAnalog, nextAnalog);
   swap(currentDigital, nextDigital);
 //Delay to avoid confusing sensor with its twin's chirp
-  delay(TwinDelay);
+  delay(EchoDelay);
 }
