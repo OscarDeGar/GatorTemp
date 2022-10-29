@@ -1,0 +1,270 @@
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/lib/ccache/cc
+-- Check for working C compiler: /usr/lib/ccache/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/lib/ccache/c++
+-- Check for working CXX compiler: /usr/lib/ccache/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found rclcpp: 2.4.1 (/opt/ros/foxy/share/rclcpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+-- Found FastRTPS: /opt/ros/foxy/include  
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.3 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found rclcpp_components: 2.4.1 (/opt/ros/foxy/share/rclcpp_components/cmake)
+-- Found pluginlib: 2.5.4 (/opt/ros/foxy/share/pluginlib/cmake)
+-- Found message_filters: 3.2.5 (/opt/ros/foxy/share/message_filters/cmake)
+-- Found libmavconn: 2.3.0 (/home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake)
+-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/foxy/share/eigen3_cmake_module/cmake)
+-- Found Eigen3: TRUE (found version "3.3.7") 
+-- Found GeographicLib: /usr/lib/x86_64-linux-gnu  
+-- Found angles: 1.12.3 (/opt/ros/foxy/share/angles/cmake)
+-- Found eigen_stl_containers: 1.0.0 (/opt/ros/foxy/share/eigen_stl_containers/cmake)
+-- Found tf2_eigen: 0.13.13 (/opt/ros/foxy/share/tf2_eigen/cmake)
+-- Found diagnostic_msgs: 2.0.5 (/opt/ros/foxy/share/diagnostic_msgs/cmake)
+-- Found diagnostic_updater: 2.0.8 (/opt/ros/foxy/share/diagnostic_updater/cmake)
+-- Found geographic_msgs: 1.0.4 (/opt/ros/foxy/share/geographic_msgs/cmake)
+-- Found mavros_msgs: 2.3.0 (/home/mitzi/ws_ros2/install/mavros_msgs/share/mavros_msgs/cmake)
+-- Found nav_msgs: 2.0.5 (/opt/ros/foxy/share/nav_msgs/cmake)
+-- Found std_srvs: 2.0.5 (/opt/ros/foxy/share/std_srvs/cmake)
+-- Found trajectory_msgs: 2.0.5 (/opt/ros/foxy/share/trajectory_msgs/cmake)
+-- Geoid model datasets found in: /usr/share/GeographicLib/geoid
+-- Gravity Field model datasets found in: /usr/share/GeographicLib/gravity
+-- Magnetic Field model datasets found in: /usr/share/GeographicLib/magnetic
+-- Found ament_cmake_gtest: 0.9.9 (/opt/ros/foxy/share/ament_cmake_gtest/cmake)
+-- Found ament_cmake_gmock: 0.9.9 (/opt/ros/foxy/share/ament_cmake_gmock/cmake)
+-- Found ament_cmake_pytest: 0.9.9 (/opt/ros/foxy/share/ament_cmake_pytest/cmake)
+-- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+-- Found gtest sources under '/opt/ros/foxy/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found gmock sources under '/opt/ros/foxy/src/gmock_vendor': C++ tests using 'Google Mock' will be built
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/mitzi/ws_ros2/mavros/mavros/include>
+-- Configured cppcheck exclude dirs and/or files: ./test/*.cpp
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mitzi/ws_ros2/build/mavros
+[35m[1mScanning dependencies of target gtest_main[0m
+[35m[1mScanning dependencies of target gmock[0m
+[35m[1mScanning dependencies of target mavros[0m
+[35m[1mScanning dependencies of target gmock_main[0m
+[35m[1mScanning dependencies of target gtest[0m
+[  1%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[  3%] [32mBuilding CXX object gmock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o[0m
+[  4%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[  6%] [32mBuilding CXX object gmock/CMakeFiles/gmock.dir/opt/ros/foxy/src/gtest_vendor/src/gtest-all.cc.o[0m
+[  8%] [32mBuilding CXX object gmock/CMakeFiles/gmock.dir/src/gmock-all.cc.o[0m
+[  9%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[  9%] Built target gtest_main
+[ 11%] [32m[1mLinking CXX static library libgtest.a[0m
+[ 12%] [32m[1mLinking CXX static library libgmock_main.a[0m
+[ 14%] [32m[1mLinking CXX static library libgmock.a[0m
+[ 14%] Built target gmock_main
+[ 14%] Built target gtest
+[ 19%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/enum_to_string.cpp.o[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/enum_sensor_orientation.cpp.o[0m
+[ 19%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/ftf_frame_conversions.cpp.o[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/ftf_quaternion_utils.cpp.o[0m
+[ 22%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/mavros_router.cpp.o[0m
+[ 24%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/mavros_uas.cpp.o[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/plugin.cpp.o[0m
+[ 27%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_ap.cpp.o[0m
+[ 29%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_data.cpp.o[0m
+[ 30%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_executor.cpp.o[0m
+[ 32%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_stringify.cpp.o[0m
+[ 32%] Built target gmock
+[ 33%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_tf.cpp.o[0m
+[ 35%] [32mBuilding CXX object CMakeFiles/mavros.dir/src/lib/uas_timesync.cpp.o[0m
+[ 37%] [32m[1mLinking CXX shared library libmavros.so[0m
+[ 37%] Built target mavros
+[35m[1mScanning dependencies of target mavros_node[0m
+[35m[1mScanning dependencies of target libmavros-quaternion-utils-test[0m
+[35m[1mScanning dependencies of target libmavros-frame-conversions-test[0m
+[35m[1mScanning dependencies of target mavros_plugins[0m
+[35m[1mScanning dependencies of target mavros-uas-test[0m
+[35m[1mScanning dependencies of target libmavros-sensor-orientation-test[0m
+[35m[1mScanning dependencies of target mavros-router-test[0m
+[ 38%] [32mBuilding CXX object CMakeFiles/libmavros-frame-conversions-test.dir/test/test_frame_conversions.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/libmavros-quaternion-utils-test.dir/test/test_quaternion_utils.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/mavros-uas-test.dir/test/test_uas.cpp.o[0m
+[ 43%] [32mBuilding CXX object CMakeFiles/mavros_node.dir/src/mavros_node.cpp.o[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/libmavros-sensor-orientation-test.dir/test/test_sensor_orientation.cpp.o[0m
+[ 46%] [32mBuilding CXX object CMakeFiles/mavros-router-test.dir/test/test_router.cpp.o[0m
+[ 48%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/altitude.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/actuator_control.cpp.o[0m
+[ 51%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/command.cpp.o[0m
+[ 53%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/dummy.cpp.o[0m
+[ 54%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/ftp.cpp.o[0m
+[ 56%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/geofence.cpp.o[0m
+[ 58%] [32m[1mLinking CXX executable libmavros-frame-conversions-test[0m
+[ 59%] [32m[1mLinking CXX executable libmavros-quaternion-utils-test[0m
+[ 59%] Built target libmavros-frame-conversions-test
+[ 61%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/global_position.cpp.o[0m
+[ 61%] Built target libmavros-quaternion-utils-test
+[ 62%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/home_position.cpp.o[0m
+[ 64%] [32m[1mLinking CXX executable libmavros-sensor-orientation-test[0m
+[ 64%] Built target libmavros-sensor-orientation-test
+[ 66%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/imu.cpp.o[0m
+[ 67%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/local_position.cpp.o[0m
+[ 69%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/manual_control.cpp.o[0m
+[ 70%] [32m[1mLinking CXX executable mavros_node[0m
+[ 70%] Built target mavros_node
+[ 72%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/mission_protocol_base.cpp.o[0m
+[ 74%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/nav_controller_output.cpp.o[0m
+[ 75%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/param.cpp.o[0m
+[ 77%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/rallypoint.cpp.o[0m
+[ 79%] [32m[1mLinking CXX executable mavros-router-test[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/rc_io.cpp.o[0m
+[ 80%] Built target mavros-router-test
+[ 82%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_accel.cpp.o[0m
+[ 83%] [32m[1mLinking CXX executable mavros-uas-test[0m
+[ 83%] Built target mavros-uas-test
+[ 85%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_attitude.cpp.o[0m
+[ 87%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_position.cpp.o[0m
+[ 88%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_raw.cpp.o[0m
+[ 90%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_trajectory.cpp.o[0m
+[ 91%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/setpoint_velocity.cpp.o[0m
+[ 93%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/sys_status.cpp.o[0m
+[ 95%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/sys_time.cpp.o[0m
+[ 96%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/waypoint.cpp.o[0m
+[ 98%] [32mBuilding CXX object CMakeFiles/mavros_plugins.dir/src/plugins/wind_estimation.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libmavros_plugins.so[0m
+[100%] Built target mavros_plugins
+-- Install configuration: ""
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/mavros_plugins.xml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/pythonpath.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/pythonpath.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/param.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/ftp.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/base.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/setpoint.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/mission.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/mavlink.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/nuttx_crc32.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/command.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/global_position.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/param.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/ftp.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/mission.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/cmd.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/checkid.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/__main__.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/utils.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/safety.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/__init__.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/system.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/utils.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/local_position.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/__init__.py
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/system.py
+Listing '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/__init__.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/base.py'...
+Listing '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/__init__.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/__main__.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/checkid.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/cmd.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/ftp.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/mission.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/param.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/safety.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/system.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/cmd/utils.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/command.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/ftp.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/global_position.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/local_position.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/mavlink.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/mission.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/nuttx_crc32.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/param.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/setpoint.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/system.py'...
+Compiling '/home/mitzi/ws_ros2/install/mavros/lib/python3.8/site-packages/mavros/utils.py'...
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/mavros/mav
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/libmavros.so
+-- Set runtime path of "/home/mitzi/ws_ros2/install/mavros/lib/libmavros.so" to ""
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/mavros/mavros_node
+-- Set runtime path of "/home/mitzi/ws_ros2/install/mavros/lib/mavros/mavros_node" to ""
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/libmavros_plugins.so
+-- Set runtime path of "/home/mitzi/ws_ros2/install/mavros/lib/libmavros_plugins.so" to ""
+-- Installing: /home/mitzi/ws_ros2/install/mavros/lib/mavros/install_geographiclib_datasets.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/mavros_router.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/px4_custom_mode.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/plugin_filter.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/uas_executor.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/utils.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/mission_protocol_base.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/setpoint_mixin.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/mavros_plugin_register_macro.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/frame_tf.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/plugin.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/include/mavros/mavros_uas.hpp
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/px4.launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/apm2.launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/px4_config.yaml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/px4_pluginlists.yaml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/node.launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/apm_pluginlists.yaml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/apm_config.yaml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/apm.launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/mavlink_bridge.launch
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/launch/event_launcher.yaml
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/library_path.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/library_path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/ament_index/resource_index/package_run_dependencies/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/ament_index/resource_index/parent_prefix_path/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/ament_prefix_path.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/ament_prefix_path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/path.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/environment/path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/local_setup.bash
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/local_setup.sh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/local_setup.zsh
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/local_setup.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/package.dsv
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/ament_index/resource_index/packages/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/ament_index/resource_index/mavros__pluginlib__plugin/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/ament_index/resource_index/rclcpp_components/mavros
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/cmake/mavrosConfig.cmake
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/cmake/mavrosConfig-version.cmake
+-- Installing: /home/mitzi/ws_ros2/install/mavros/share/mavros/package.xml

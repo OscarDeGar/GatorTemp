@@ -1,0 +1,104 @@
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/lib/ccache/cc
+-- Check for working C compiler: /usr/lib/ccache/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/lib/ccache/c++
+-- Check for working CXX compiler: /usr/lib/ccache/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found ASIO: /usr/include  
+-- Found Python3: /usr/bin/python3.8 (found version "3.8.10") found components: Interpreter 
+-- Copy mavlink_dialect.hpp to source tree
+-- Found ament_cmake_gtest: 0.9.9 (/opt/ros/foxy/share/ament_cmake_gtest/cmake)
+-- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+-- Found gtest sources under '/opt/ros/foxy/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/mitzi/ws_ros2/mavros/libmavconn/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mitzi/ws_ros2/build/libmavconn
+[35m[1mScanning dependencies of target gtest_main[0m
+[35m[1mScanning dependencies of target gtest[0m
+[35m[1mScanning dependencies of target mavconn[0m
+[  8%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[ 16%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/mavconn.dir/generated/src/mavlink_helpers.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/mavconn.dir/src/tcp.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/mavconn.dir/src/interface.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/mavconn.dir/src/serial.cpp.o[0m
+[ 58%] [32mBuilding CXX object CMakeFiles/mavconn.dir/src/udp.cpp.o[0m
+[ 66%] [32m[1mLinking CXX static library libgtest.a[0m
+[ 75%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[ 75%] Built target gtest
+[ 75%] Built target gtest_main
+[ 83%] [32m[1mLinking CXX shared library libmavconn.so[0m
+[ 83%] Built target mavconn
+[35m[1mScanning dependencies of target test_mavconn[0m
+[ 91%] [32mBuilding CXX object CMakeFiles/test_mavconn.dir/test/test_mavconn.cpp.o[0m
+[100%] [32m[1mLinking CXX executable test_mavconn[0m
+[100%] Built target test_mavconn
+-- Install configuration: ""
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/lib/libmavconn.so
+-- Set runtime path of "/home/mitzi/ws_ros2/install/libmavconn/lib/libmavconn.so" to ""
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/mavlink_dialect.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/msgbuffer.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/udp.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/mavlink_dialect.hpp.em
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/thread_utils.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/console_bridge_compat.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/interface.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/tcp.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/serial.hpp
+-- Up-to-date: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn
+-- Up-to-date: /home/mitzi/ws_ros2/install/libmavconn/include/mavconn/mavlink_dialect.hpp
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/Modules
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/Modules/CheckGeographicLibDatasets.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/Modules/em_expand.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/Modules/FindASIO.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/library_path.sh
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/library_path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/ament_index/resource_index/package_run_dependencies/libmavconn
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/ament_index/resource_index/parent_prefix_path/libmavconn
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/ament_prefix_path.sh
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/ament_prefix_path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/path.sh
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/environment/path.dsv
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/local_setup.bash
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/local_setup.sh
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/local_setup.zsh
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/local_setup.dsv
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/package.dsv
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/ament_index/resource_index/packages/libmavconn
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/libmavconn-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/libmavconnConfig.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/cmake/libmavconnConfig-version.cmake
+-- Installing: /home/mitzi/ws_ros2/install/libmavconn/share/libmavconn/package.xml

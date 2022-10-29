@@ -1,0 +1,12 @@
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp: In member function ‘void mavros::std_plugins::SystemStatusPlugin::process_autopilot_version_normal(mavlink::common::msg::AUTOPILOT_VERSION&, uint8_t, uint8_t)’:
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp:759:36: warning: lambda templates are only available with ‘-std=c++2a’ or ‘-std=gnu++2a’ [-Wpedantic]
+  759 |     auto log_info = [&lg, &prefix] < typename ... Args > (const std::string & fmt, Args ... args) {
+      |                                    ^
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp: In member function ‘void mavros::std_plugins::SystemStatusPlugin::process_autopilot_version_apm_quirk(mavlink::common::msg::AUTOPILOT_VERSION&, uint8_t, uint8_t)’:
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp:787:36: warning: lambda templates are only available with ‘-std=c++2a’ or ‘-std=gnu++2a’ [-Wpedantic]
+  787 |     auto log_info = [&lg, &prefix] < typename ... Args > (const std::string & fmt, Args ... args) {
+      |                                    ^
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp: In member function ‘void mavros::std_plugins::SystemStatusPlugin::handle_battery_status(const mavlink_message_t*, mavlink::common::msg::BATTERY_STATUS&, mavros::plugin::filter::SystemAndOk)’:
+/home/mitzi/ws_ros2/mavros/mavros/src/plugins/sys_status.cpp:1111:32: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+ 1111 |     if (!disable_diag && bs.id >= 0 && bs.id < MAX_NR_BATTERY_STATUS) {
+      |                          ~~~~~~^~~~
