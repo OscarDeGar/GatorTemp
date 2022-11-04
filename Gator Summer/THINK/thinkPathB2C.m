@@ -1,41 +1,34 @@
-function [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
+function   [motorControls, wayStep]=thinkPathB2C(CurrentPosHead, waypoints, wayStep,FronttoBack)
 %%% Think function path from Camp Bravo to Camp Charlie
  % INPUTS: SenseData(struct) - gps
  % OUTPUT: motorControls(struct) - throttle, brake, steer
-
-    % Data vars
-%     sharpData = senseData.sharp;
-%     sonarData = senseData.sonar;
-%     gpsData = senseData.gps;
-%     lidarData = senseData.gps;
-%     joystickData = senseData.joystick;
-
-    % Get current angle we're facing
-        [CurrentPosHead] = currentAngleGPS(senseData.gpsData);
-
     % Get Destination Vector
-        destVec = gpsAngle(CurrentPosHead, waypoints, wayStep);
-        
+    Xmid=CurrentPosHead.X;
+    Ymid=CurrentPosHead.Y;
+    bear=CurrentPosHead.bear;
+       destVec = gpsAngle(Xmid,Ymid,waypoints, wayStep,bear);
+      % destVec = BicyclegpsAngle(Xmid,Ymid,waypoints, wayStep, bear,FronttoBack)
+       
     % Check distance to waypoint 
-        throttle = 1; 
-        steer= destVec.bear;
-        if steer>30
-            steer=30;
-        end
-        if steer<-30
-            steer=-30;
-        end
-        if steer < 10 && steer > -10
-            steer=0;
-        end
-        
-    
-        if destVec.dist < 1.5 || destVec.bear>90 ||  destVec.bear<-90 %meters
-           wayStep = wayStep + 1;
-          % [motorControls, wayStep] = thinkPathB2C(senseData, waypoints, wayStep)
-        end
-
-        motorControls  = struct( ...
+        throttle = 1;
+         head=destVec.waypointbear;
+         dist=destVec.dist;
+         steer=atand((2*FronttoBack*sind(head))/dist); %https://thomasfermi.github.io/Algorithms-for-Automated-Driving/Control/PurePursuit.html;
+         motorControls  = struct( ...
            "throttle", throttle,...
            "steer",steer);
+         if dist < 1 || head>90 || head<-90 %meters
+            %disp("Skiped Waypoint")
+           wayStep = wayStep + 1;
+           if wayStep<=size(waypoints,1)
+            [motorControls, wayStep]=thinkPathB2C(CurrentPosHead, waypoints, wayStep,FronttoBack);
+           end
+         end
+        %deadzone
+%         if steer < 10 && steer > -10
+%             steer=0;
+%         end      
+end
+
+       
     

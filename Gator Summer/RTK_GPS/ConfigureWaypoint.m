@@ -1,9 +1,10 @@
-function [waypoints]=ConfigureWaypoint(gps1file,gps2file)
+function [waypoints,lat1new,lon1new,lat2new,lon2new, middlelatref,middlelonref]=ConfigureWaypoint(gps1file,gps2file,shift)
+
     [lat1,lon1,UTCDateTime1]=PlotGPSlog(gps1file);
     [lat2,lon2,UTCDateTime2]=PlotGPSlog(gps2file);
     
     % Check Starts of Data
-    if  UTCDateTime1(1,1)< UTCDateTime2(1,1)
+    if  UTCDateTime1(1,1)==UTCDateTime2(1,1)
         for i=1:size(lat1,2)
             if  UTCDateTime1(1,i)==UTCDateTime2(1,1)
                 start=i;
@@ -41,43 +42,61 @@ function [waypoints]=ConfigureWaypoint(gps1file,gps2file)
             lon1new=lon1(1,1:length);
         end
     end
-    %Covert to middle front wheel
-    middlelat=mean([lat1new; lat2new]);
-    middlelon=mean([lon1new; lon2new]);
-    R = 6371000; % radius of Earth in meterss
-    for i=1:size(middlelat,2)
+    %Pre allocate space for arrays
+    Ymid=zeros(size(lon1new,2),1);
+    Xmid=zeros(size(lon1new,2),1);
+     X1=zeros(size(lon1new,2),1);
+    Y2=zeros(size(lon1new,2),1);
+     X2=zeros(size(lon1new,2),1);
+    Y1=zeros(size(lon1new,2),1);
+    latMid=zeros(size(lon1new,2),1);
+    lonMid=zeros(size(lon1new,2),1);
+    bear1=zeros(size(lon1new,2),1);
+
+    for i=1:size(lat2new,2)
         lat1 = lat1new(1,i) * pi/180; % latitude of current pos
         lon1 = lon1new(1,i) * pi/180; % longitude of current pos
         lat2 = lat2new(1,i)* pi/180; % latitude of destination
         lon2 = lon2new(1,i) * pi/180; % longitude of destination
+        [latMid(i),lonMid(i)]= Midpoint2GPS(lat1,lon1,lat2,lon2);
+        [~,~,bear]= DistBetween2GPS(lat1,lon1,lat2,lon2);
+        bear = bear-90;
         
-        % calculate bearing angle relative to true North (degs)
-        X = cos(lat2) * sin(lon2-lon1);
-        Y = cos(lat1) * sin(lat2) - sin(lat1)*cos(lat2)*cos(lon2-lon1);
-        bear = atan2(X, Y) * 180/pi-90;
             if bear<-180
                 bear=360+bear;
             end
-            %Convert meters to latitude
-        middlelat(1,i)=middlelat(1,i)+ ((cosd(bear)*0.762) / R) * (180 / pi);%0.762 meters is the distance between the center of the gps's and the front axel
-        middlelon(1,i)= middlelon(1,i)+ ((sind(bear)*0.762) / R) * (180 / pi) / cos( middlelon(1,i) * pi/180);%+cosd(bear)*0.762;
+        bear1(i)=bear;
+        if i==1
+            middlelatref=latMid(1);
+             middlelonref=lonMid(1);
+
+        end
+        [Y,X,~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),deg2rad(latMid(i)),deg2rad(lonMid(i)));
+         Ymid(i)=Y-shift*sind(bear);
+         Xmid(i)=X-shift*cosd(bear);
+        [Y1(i),X1(i),~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),lat1,lon1);
+        [Y2(i),X2(i),~]=DistBetween2GPS(deg2rad(middlelatref),deg2rad(middlelonref),lat2,lon2);
+
+%         
 
     end
-    % Generate Middle Line
-    clf
-    waypoints=[middlelat(5:2:end);middlelon(5:2:end)];
-    figure(2)
+    % waypoints=[middlelat(15:2:end);middlelon(15:2:end)];
+    waypoints=[Ymid,Xmid];
+
     start=1;
-    section=size(middlelat,2);
-    hold on
-    plot(middlelon(start:section),middlelat(start:section),'-b');
-    plot(lon1new(start:section),lat1new(start:section),'-y');
-    plot(lon2new(start:section),lat2new(start:section),'-g');
-    hold off
-    
-    % Clean Workspace
-    vars = {'i','lat1','lat1new','lat2','lat2new','length','lon1','lon1new','lon2','lon2new',...
-        'middlelat','middlelon','section','start','UTCDateTime1','UTCDateTime2'};
-    clear (vars{:});
-    clear vars;
+section=20;
+    clf
+    figure(2)
+     hold on
+     title("Meters from Reference")
+     xlabel('Meters in Longitude Direction') 
+    ylabel('Meters in Latitude Direction') 
+    quiver(Xmid(start:section),Ymid(start:section),cosd(bear1(start:section)),sind(bear1(start:section)))
+plot(Xmid(start:section),Ymid(start:section),'-bd');
+plot(X1(start:section),Y1(start:section),'-yd');
+plot(X2(start:section),Y2(start:section),'-gd');
+
+     legend({'Bearing','Center Back Axel','Left GPS','Right GPS'},'Location','southeast')
+hold off
+
 end

@@ -28,8 +28,8 @@ lonVector = lonVector(~isnan(lonVector));
 %UTCDateTime = UTCDateTime(~ismissing(UTCDateTime));
 
 % Plot the position in geographic coordinates
-geoplot(latVector,lonVector,'Marker',"*",'MarkerSize',3, ...
-    "Color",'blue','MarkerFaceColor','red');
+% geoplot(latVector,lonVector,'Marker',"*",'MarkerSize',3, ...
+%     "Color",'blue','MarkerFaceColor','red');
 % Selects the basemap
 %geobasemap 'topographic';
 end
