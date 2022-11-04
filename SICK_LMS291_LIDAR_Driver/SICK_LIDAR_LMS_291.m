@@ -34,7 +34,7 @@ classdef SICK_LIDAR_LMS_291<handle
             %no parity, 1 stop bit, no flow control
             if SICK_LIDAR_LMS_291_OBJECT.INITIALIZED==0
                 Initial_buad=9600;
-                SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,Initial_buad);
+                SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,Initial_buad)
                 SICK_LIDAR_LMS_291_OBJECT.INITIALIZED=1;
             else
                 SICK_LIDAR_LMS_291_OBJECT.SERIAL_DEVICE=serialport(SICK_LIDAR_LMS_291_OBJECT.COM_PORT,SICK_LIDAR_LMS_291_OBJECT.BUAD);
