@@ -5,7 +5,7 @@ Source ROS2:<br>
 Install Mavros for ROS2 Foxy:<br>
 ```sudo apt install ros-foxy-mavros```<br>
 Install pymavlink:<br>
-```sudo python -m pip install --upgrade pymavlink```
+```sudo python -m pip install --upgrade pymavlink```<br>
 Install GeographicLib datasets:<br>
 ```wget https://raw.githubusercontent.com/mavlink/mavros/ros2/mavros/scripts/install_geographiclib_datasets.sh```<br>
 ```chmod +x ./install_geographiclib_datasets.sh```<br>
