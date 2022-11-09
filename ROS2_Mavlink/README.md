@@ -4,6 +4,8 @@ Source ROS2:<br>
 ``` source /opt/ros/foxy/setup.bash```<br>
 Install Mavros for ROS2 Foxy:<br>
 ```sudo apt install ros-foxy-mavros```<br>
+Install pymavlink:<br>
+```sudo python -m pip install --upgrade pymavlink```
 Install GeographicLib datasets:<br>
 ```wget https://raw.githubusercontent.com/mavlink/mavros/ros2/mavros/scripts/install_geographiclib_datasets.sh```<br>
 ```chmod +x ./install_geographiclib_datasets.sh```<br>
@@ -42,7 +44,7 @@ Source ROS2:<br>
 ``` source /opt/ros/foxy/setup.bash```<br>
 Run node:<br>
 ```ros2 run mavros mavros_node --ros-args --params-file YOUR_OWN_PATH_TO_params.yaml```<br>
-Check topics:<br>
+Check topics:<br> dmesg | grep tty dmesg | g dmesg | grep tty dmesg | grep ttyrep tty
 ```ros2 topic list```<br>
 You should see:
 ```/diagnostics
