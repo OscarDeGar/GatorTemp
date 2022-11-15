@@ -1,10 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
-from geometry_msgs.msg import Twist
-import time
 import numpy as np
-import random
 import math
 
 class wall_detection(Node):
@@ -20,10 +17,10 @@ class wall_detection(Node):
         self.current_scan = None
         self.scan_length = 761
         self.front_spread = 15 * math.pi / 180
-        self.danger_threashold = 5
+        self.danger_threshold = 5
         
 
-        #self.left_bound = 
+        
 
     def injest_scan(self, msg):
         self.current_scan = msg
@@ -33,20 +30,18 @@ class wall_detection(Node):
     def check_front_area(self):
         radians = np.linspace(self.current_scan.angle_min, self.current_scan.angle_max, len(self.current_scan.ranges))
         mapped_list = list(zip(radians,self.current_scan.ranges))
-        midpoint = math.floor(len(mapped_list) /2)
-
-        print(mapped_list)
-
-
-
-
-
         
+        left_start = math.floor((self.scan_length / 2) - (self.front_spread * self.current_scan.angle_increment / 2))
+        right_end = math.ceil((self.scan_length / 2) - (self.front_spread * self.current_scan.angle_increment / 2))
         
+        cone_ranges = self.current_scan.ranges[left_start:right_end]
 
-        
+        if np.average(cone_ranges) <= self.danger_threshold:
+            print("Stop")
+        else:
+            print("Go")
 
-        
+
 
 
 
