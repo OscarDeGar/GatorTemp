@@ -1,6 +1,6 @@
 classdef SICK_LIDAR_LMS_291<handle
 %Make sure that the SICK LIDAR has a green light
-%When reading from Serial only only the first two hex characters are the
+%When reading from Serial only the first two hex characters are the
 %same the characters after change based on computer.
     properties (Access=public)
         SERIAL_DEVICE 
